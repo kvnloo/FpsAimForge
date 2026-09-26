@@ -202,8 +202,7 @@ class StatsScreen : public UiScreen {
       reference_scenario_name_ = scenario_->unevaluated_def.reference_def().scenario_name();
     }
 
-    is_valid_ = is_valid_ =
-        app_.stats_manager().GetStatsDetails(scenario_name_, run_id_, &details_);
+    is_valid_ = app_.stats_manager().GetStatsDetails(scenario_name_, run_id_, &details_);
 
     performance_stats_ = state_.GetPerformanceStats(scenario_name, run_id);
 

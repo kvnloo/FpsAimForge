@@ -31,7 +31,7 @@ class SingleReactionTimeScreen : public Screen {
                            const Settings& settings,
                            const ReactionTimeOptions& options,
                            ReactionTimeResult* result)
-      : Screen(*app), result_(result), settings_(settings), options_(options) {
+      : Screen(*app), settings_(settings), result_(result), options_(options) {
     app->SetPresentMode(settings.present_mode());
   }
 

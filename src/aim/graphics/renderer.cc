@@ -274,7 +274,7 @@ class RendererImpl : public Renderer {
     target_info.layer_or_depth_plane = 0;
     target_info.cycle = true;
 
-    SDL_GPUDepthStencilTargetInfo depth_stencil_target_info = {0};
+    SDL_GPUDepthStencilTargetInfo depth_stencil_target_info = {};
     depth_stencil_target_info.texture = depth_texture_;
     depth_stencil_target_info.cycle = true;
     depth_stencil_target_info.clear_depth = 1;
@@ -918,7 +918,7 @@ std::unique_ptr<Renderer> CreateRenderer(const std::vector<std::filesystem::path
   if (!renderer->Initialize(shader_dir)) {
     return {};
   }
-  return std::move(renderer);
+  return renderer;
 }
 
 }  // namespace aim

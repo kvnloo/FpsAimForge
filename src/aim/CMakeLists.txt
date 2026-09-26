@@ -241,6 +241,9 @@ target_link_libraries(
     protobuf::libprotobuf
     spdlog)
 
+include(warnings.cmake)
+target_compile_options(${NAME} PRIVATE ${PROJECT_WARNING_FLAGS})
+
 target_include_directories(${NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
 set_target_properties(${NAME} PROPERTIES COMPILE_WARNING_AS_ERROR ON)
@@ -251,3 +254,5 @@ if(MSVC)
     # /we4062 treats missing enum cases as errors but allows default
     target_compile_options(${NAME} PRIVATE /we4062)
 endif()
+
+

@@ -25,6 +25,8 @@ static std::string ObjectTypeToString(ObjectType t) {
       return "Crosshair";
     case ObjectType::GUIDE:
       return "Guide";
+    default:
+      break;
   }
 
   assert(false && "Unhandled ObjectType");

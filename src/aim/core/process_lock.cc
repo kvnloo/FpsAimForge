@@ -125,7 +125,7 @@ std::string GetProcessNameFromPid(i64 pid) {
   char path[PATH_MAX];
   char dest[PATH_MAX];
   // Construct path to the 'exe' link
-  snprintf(path, sizeof(path), "/proc/%lld/exe", pid);
+  snprintf(path, sizeof(path), "/proc/%lld/exe", static_cast<long long>(pid));
 
   // Read where the symbolic link points
   ssize_t bytes = readlink(path, dest, sizeof(dest) - 1);

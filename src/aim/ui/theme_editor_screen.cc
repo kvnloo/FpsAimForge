@@ -38,8 +38,8 @@ class ThemeEditor {
               std::vector<std::string> texture_names,
               Application& app)
       : app_(app),
-        original_theme_name_(theme_name),
         current_theme_name_(theme_name),
+        original_theme_name_(theme_name),
         current_theme_(current_theme),
         theme_names_(std::move(theme_names)),
         texture_names_(std::move(texture_names)) {

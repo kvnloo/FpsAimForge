@@ -59,7 +59,7 @@ bool IconButtonImpl(const char* icon, float scale, bool is_circle) {
   size.x *= scale;
 
   auto pos = GetCursorPos();
-  pos.x -= ((full_size.x - size.x) * 0.5);
+  pos.x -= ((full_size.x - size.x) * 0.5f);
   IdGuard cid(std::format("SelectIcon{}", icon));
   if (is_circle) {
     ImVec2 frame_padding = ImGui::GetStyle().FramePadding;
@@ -106,7 +106,7 @@ bool MenuButton() {
   // return selected;
   //
   auto pos = GetCursorPos();
-  pos.x -= ((full_size.x - size.x) * 0.5);
+  pos.x -= ((full_size.x - size.x) * 0.5f);
   bool selected = Selectable("##selectable_menu", false, 0, size);
   ImGui::SameLine();
   ImGui::SetCursorPos(pos);
@@ -137,7 +137,7 @@ bool SimpleDropdown(const std::string& id,
     if (opened != nullptr) {
       *opened = true;
     }
-    for (int i = 0; i < values.size(); ++i) {
+    for (size_t i = 0; i < values.size(); ++i) {
       ImGui::IdGuard lid(i);
       const auto& item = values[i];
       bool is_selected = item == *value;
@@ -486,7 +486,6 @@ void ReadonlyLabeledFloat(const std::string& label, float value, int width_multi
 bool Chip(const std::string& label, bool selected) {
   ImGui::PushStyleVar(ImGuiStyleVar_SelectableTextAlign, ImVec2(0.5f, 0.5f));
   ImVec2 size = ImGui::CalcTextSize(label.c_str());
-  ImVec2 frame_padding = ImGui::GetStyle().FramePadding;
   bool clicked = ImGui::Selectable(label.c_str(), selected, ImGuiSelectableFlags_None, size);
   ImGui::PopStyleVar();
   return clicked;

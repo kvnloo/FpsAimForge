@@ -37,7 +37,7 @@ std::unique_ptr<Sound> Sound::Load(MIX_Mixer* mixer, const std::filesystem::path
 }
 
 Sound::Sound(MIX_Mixer* mixer, MIX_Audio* audio, std::vector<MIX_Track*> track_queue)
-    : mixer_(mixer), audio_(audio), track_queue_(std::move(track_queue)) {}
+    : audio_(audio), mixer_(mixer), track_queue_(std::move(track_queue)) {}
 
 Sound::~Sound() {}
 

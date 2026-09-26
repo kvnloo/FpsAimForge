@@ -88,7 +88,7 @@ class AddBundleDialog {
 
 class BundleUiComponentImpl : public BundleUiComponent {
  public:
-  explicit BundleUiComponentImpl(UiScreen& screen) : app_(screen.app()), screen_(screen) {}
+  explicit BundleUiComponentImpl(UiScreen& screen) : screen_(screen), app_(screen.app()) {}
 
   void Show() override {
     ImGui::IdGuard cid("BundleUiComponent");

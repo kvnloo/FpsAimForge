@@ -16,7 +16,6 @@ glm::vec2 GetRandomPositionOnWall(const Wall& wall, Random& rand) {
 }
 
 glm::vec2 GetRandomPositionInEllipse(float radius_x, float radius_y, Random& rand) {
-  auto dist = std::uniform_real_distribution<float>(0, 1.0f);
   float r = sqrt(rand.GetInRange(0, 1));
   float rotate_radians = glm::radians(rand.GetInRange(0, 360));
 
@@ -30,7 +29,6 @@ glm::vec2 GetRandomPositionOnCircle(float radius, Random& rand) {
   if (radius <= 0) {
     return glm::vec2(0);
   }
-  auto dist_degrees = std::uniform_real_distribution<float>(0, 360);
   float rotate_radians = glm::radians(rand.GetInRange(0, 360));
   double x = radius * std::cos(rotate_radians);
   double y = radius * std::sin(rotate_radians);
@@ -38,7 +36,6 @@ glm::vec2 GetRandomPositionOnCircle(float radius, Random& rand) {
 }
 
 glm::vec2 GetRandomPositionInCircle(float min_radius, float max_radius, Random& rand) {
-  auto dist_radius = std::uniform_real_distribution<float>(min_radius, max_radius);
   return GetRandomPositionOnCircle(rand.GetInRange(min_radius, max_radius), rand);
 }
 

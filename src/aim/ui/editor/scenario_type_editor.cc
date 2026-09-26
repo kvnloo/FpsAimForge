@@ -1011,6 +1011,7 @@ void InitializeScenarioType(ScenarioDef& def, ScenarioDef::TypeCase scenario_typ
       break;
     case ScenarioDef::kWaypointDef:
       def.mutable_waypoint_def();
+      break;
     case ScenarioDef::kWallWanderDef:
       def.mutable_wall_wander_def();
       break;

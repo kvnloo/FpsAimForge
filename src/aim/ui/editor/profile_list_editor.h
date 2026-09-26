@@ -62,8 +62,6 @@ void DrawOrderListEditor(const std::string& type_name,
     number = std::min<u32>(number, profile_list->size() - 1);
     order_list->Set(i, number);
 
-    auto last_size = ImGui::GetItemRectSize();
-
     const char* item_menu_id = "order_list_item_menu";
     if (ImGui::BeginPopupContextItem(item_menu_id)) {
       if (ImGui::Selectable("Insert above")) {

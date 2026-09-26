@@ -1,6 +1,5 @@
 set(NAME "FpsAimForge")
 
-
 set(PROJECT_SOURCES
     main.cc
 )

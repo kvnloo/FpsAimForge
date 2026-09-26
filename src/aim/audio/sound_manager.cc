@@ -20,7 +20,7 @@ std::unique_ptr<Sound> LoadSound(MIX_Mixer* mixer,
   for (const std::filesystem::path& dir : sound_dirs) {
     auto loaded_sound = Sound::Load(mixer, dir / name);
     if (loaded_sound) {
-      return std::move(loaded_sound);
+      return loaded_sound;
     }
   }
 
@@ -50,7 +50,7 @@ std::vector<std::string> SoundManager::ListSounds() {
 }
 
 SoundManager::SoundManager(MIX_Mixer* mixer, const std::vector<std::filesystem::path>& sound_dirs)
-    : mixer_(mixer), sound_dirs_(sound_dirs) {}
+    : sound_dirs_(sound_dirs), mixer_(mixer) {}
 
 void SoundManager::LoadSounds(const Settings& settings) {
   const SoundSettings& s = settings.sounds();

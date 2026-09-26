@@ -214,7 +214,7 @@ class MovementControllerImpl : public MovementController {
  public:
   MovementControllerImpl(
       float speed, float acceleration, Wall wall, float min_y, ScenarioDef def, Application& app)
-      : def_(def), app_(app), wall_(wall) {
+      : wall_(wall), def_(def), app_(app) {
     auto d = def_.bounce_def();
     const WallBounds bounds = wall.GetWallBounds(d.bounds());
     const WallRelativeBounds relative_bounds = wall.GetWallRelativeBounds(d.relative_bounds());

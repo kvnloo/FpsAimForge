@@ -16,7 +16,7 @@ struct TimeSpan {
     if (duration_micros < 0) {
       return 0;
     }
-    return duration_micros / 1000000.0f;
+    return static_cast<float>(duration_micros) / 1000000.0f;
   }
 };
 

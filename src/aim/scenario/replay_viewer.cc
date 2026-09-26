@@ -56,7 +56,6 @@ std::vector<float> GetMouseSpeeds(const Replay& replay) {
 
   // When calculating delta, look at the pitch/yaw n frames ahead.
   i64 look_ahead_size = 4;
-  float last_speed = 0;
   for (int frame_number = 0; frame_number < replay.pitch_yaws.size() - look_ahead_size;
        ++frame_number) {
     const PitchYaw& current_pitch_yaw = replay.pitch_yaws[frame_number];
@@ -71,7 +70,6 @@ std::vector<float> GetMouseSpeeds(const Replay& replay) {
 
     float speed = delta_per_second * 100;
     result.push_back(speed);
-    last_speed = speed;
   }
   return result;
 }
@@ -156,8 +154,8 @@ class ReplayView {
       : camera(Camera(CameraParams(replay->room))),
         target_manager(replay->room),
         replay_(replay),
-        micros_per_frame_(GetMicrosPerFrame(replay->replay_fps)),
-        app_(app) {
+        app_(app),
+        micros_per_frame_(GetMicrosPerFrame(replay->replay_fps)) {
     previous_click_durations_.reserve(400);
   }
 
@@ -321,7 +319,6 @@ class ReplayView {
   bool is_done_ = false;
   i64 current_time_micros_ = 0;
   i64 last_click_time_micros_ = 0;
-  i64 next_click_time_micros_ = 0;
   std::vector<float> previous_click_durations_;
   i64 micros_per_frame_ = 0;
 };

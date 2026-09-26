@@ -329,7 +329,7 @@ class ApplicationImpl : public Application {
 
   spdlog::logger* logger() override {
     return logger_.get();
-  };
+  }
 
   ApplicationState& state() override {
     return *state_.get();
@@ -342,7 +342,7 @@ class ApplicationImpl : public Application {
   float GetAppRunTimeSeconds() const override {
     i64 duration_micros = GetNowEpochMicros() - application_start_time_micros_;
     if (duration_micros > 0) {
-      float duration_seconds = duration_micros / 1000000.0f;
+      float duration_seconds = static_cast<float>(duration_micros) / 1000000.0f;
       return duration_seconds;
     }
     return 0.0f;
@@ -396,7 +396,7 @@ class ApplicationImpl : public Application {
         return true;
       }
       std::shared_ptr<Screen> current_screen = screen_stack_.back();
-      for (int i = 0; i < screen_stack_.size() - 1; ++i) {
+      for (size_t i = 0; i < screen_stack_.size() - 1; ++i) {
         screen_stack_[i]->EnsureDetached();
       }
       current_screen->EnsureAttached();

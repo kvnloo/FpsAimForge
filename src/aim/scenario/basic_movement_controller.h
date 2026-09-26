@@ -8,8 +8,8 @@
 #include "aim/core/application.h"
 #include "aim/core/target.h"
 #include "aim/proto/scenario.pb.h"
-#include "glm/vec2.hpp"
-#include "glm/vec3.hpp"
+#include "glm/vec2.hpp"  // IWYU pragma: keep
+#include "glm/vec3.hpp"  // IWYU pragma: keep
 
 namespace aim {
 
@@ -81,10 +81,10 @@ class StrafeController {
       : initial_direction_(initial_direction),
         min_(min),
         max_(max),
-        absolute_center_((min + max) / 2.0f),
         relative_min_(relative_min),
         relative_max_(relative_max),
         unscaled_acceleration_(params.acceleration),
+        absolute_center_((min + max) / 2.0f),
         wall_(wall) {}
 
   float GetUpdatedPosition(Target& t,

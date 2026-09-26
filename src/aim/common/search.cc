@@ -27,7 +27,7 @@ std::vector<std::string_view> SplitCamelCase(const std::string_view& full_word) 
     return {};
   }
   std::vector<std::string_view> words;
-  for (int i = 0; i < word_starts.size() - 1; ++i) {
+  for (size_t i = 0; i < word_starts.size() - 1; ++i) {
     words.push_back(full_word.substr(word_starts[i], word_starts[i + 1]));
   }
   words.push_back(full_word.substr(word_starts.back()));

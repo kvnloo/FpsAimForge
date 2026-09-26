@@ -4,7 +4,6 @@
 #include <optional>
 
 #include "aim/common/imgui_ext.h"
-#include "aim/common/name_util.h"
 #include "aim/core/guide_manager.h"
 #include "aim/core/playlist_manager.h"
 #include "aim/core/scenario_manager.h"
@@ -18,7 +17,7 @@ namespace {
 class SelectObjectDialogImpl : public SelectObjectDialog {
  public:
   SelectObjectDialogImpl(const std::string& id, ObjectType type)
-      : id_(id), popup_(id), type_(type) {}
+      : popup_(id), id_(id), type_(type) {}
 
   bool Draw(Result* result) override {
     ImGui::IdGuard cid("SelectObjectDialog_" + id_);

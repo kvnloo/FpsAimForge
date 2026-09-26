@@ -19,11 +19,11 @@ class StrafeMovementController : public BasicWallMovementController {
   StrafeMovementController(
       float speed, float acceleration, Wall wall, ScenarioDef def, Application& app)
       : BasicWallMovementController(speed),
-        acceleration_(acceleration),
-        original_acceleration_(acceleration),
         wall_(wall),
         def_(def),
-        app_(app) {}
+        app_(app),
+        acceleration_(acceleration),
+        original_acceleration_(acceleration) {}
 
  protected:
   void UpdateDirectionAndSpeed(Target& t, float delta_seconds) override {
@@ -267,7 +267,6 @@ class StrafeMovementController : public BasicWallMovementController {
   float max_velocity_;
   float acceleration_;
 
-  float original_max_velocity_;
   float original_acceleration_;
 
   bool is_stopping_ = false;

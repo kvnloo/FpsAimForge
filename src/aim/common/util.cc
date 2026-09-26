@@ -2,28 +2,15 @@
 
 #include <stdlib.h>
 
-#include <algorithm>
-#include <format>
-#include <functional>
-#include <memory>
-#include <optional>
-#include <random>
 #include <string>
-#include <vector>
 
 #include "absl/strings/ascii.h"
-#include "absl/strings/str_split.h"
-#include "absl/strings/string_view.h"
-#include "absl/strings/strip.h"
 #include "aim/common/simple_types.h"
 #include "aim/proto/common.pb.h"
-#include "glm/ext/scalar_common.hpp"
-#include "glm/trigonometric.hpp"
-#include "glm/vec2.hpp"
-#include "glm/vec3.hpp"
-#include "glm/vec4.hpp"
-#include "google/protobuf/message.h"
-#include "google/protobuf/util/message_differencer.h"
+#include "glm/ext/scalar_common.hpp"  // IWYU pragma: keep
+#include "glm/vec2.hpp"  // IWYU pragma: keep
+#include "glm/vec3.hpp"  // IWYU pragma: keep
+#include "glm/vec4.hpp"  // IWYU pragma: keep
 #include "imgui.h"
 
 namespace aim {
@@ -95,7 +82,6 @@ std::string ToHexString(const StoredRgb& c) {
 
 StoredRgb ToStoredRgb(const StoredColor& c) {
   float mult = c.has_multiplier() ? c.multiplier() : 1.0f;
-  int a = kMaxRgbValue;
 
   int r = c.r();
   int g = c.g();
