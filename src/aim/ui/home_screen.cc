@@ -386,7 +386,6 @@ class HomeScreen : public UiScreen {
   std::unique_ptr<BundleUiComponent> bundle_ui_component_;
   std::unique_ptr<ScenariosComponent> scenarios_component_;
   std::unique_ptr<GuidesComponent> guides_component_;
-  bool request_dpi_ = false;
   SetInitialDpiDialog set_dpi_dialog_;
   std::unique_ptr<TopBar> top_bar_ = CreateTopBar();
 };

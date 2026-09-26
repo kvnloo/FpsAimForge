@@ -866,7 +866,6 @@ class SettingsScreen : public UiScreen {
   std::vector<KeybindItem> keybind_items_;
   float char_x_ = 0;
 
-  int edit_crosshair_index_ = 0;
   SoundInputDialog sound_input_dialog_;
 
   bool read_display_names_ = false;

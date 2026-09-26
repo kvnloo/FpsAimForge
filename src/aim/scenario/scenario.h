@@ -155,7 +155,6 @@ class Scenario : public Screen {
   Crosshair crosshair_;
   float crosshair_size_;
   bool is_click_held_ = false;
-  bool is_done_ = false;
   std::vector<DelayedTask> delayed_tasks_;
   i64 max_render_age_micros_;
 

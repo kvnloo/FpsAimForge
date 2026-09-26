@@ -96,7 +96,6 @@ class ReplayRecorder {
 
  private:
   ReplayEvent& AddEvent(i64 now_micros, ReplayEventType type);
-  u16 replay_fps_;
   i32 num_targets_;
 
   std::unordered_map<u16, u16> target_data_channel_map_;

@@ -33,13 +33,18 @@ std::unique_ptr<Sound> Sound::Load(MIX_Mixer* mixer, const std::filesystem::path
     }
     track_queue.push_back(track);
   }
-  return std::unique_ptr<Sound>(new Sound(mixer, audio, std::move(track_queue)));
+  return std::unique_ptr<Sound>(new Sound(audio, std::move(track_queue)));
 }
 
-Sound::Sound(MIX_Mixer* mixer, MIX_Audio* audio, std::vector<MIX_Track*> track_queue)
-    : audio_(audio), mixer_(mixer), track_queue_(std::move(track_queue)) {}
+Sound::Sound(MIX_Audio* audio, std::vector<MIX_Track*> track_queue)
+    : audio_(audio), track_queue_(std::move(track_queue)) {}
 
-Sound::~Sound() {}
+Sound::~Sound() {
+  MIX_DestroyAudio(audio_);
+  for (MIX_Track* track : track_queue_) {
+    MIX_DestroyTrack(track);
+  }
+}
 
 void Sound::Play(PlaySoundOptions options) {
   int i = current_track_queue_index_;

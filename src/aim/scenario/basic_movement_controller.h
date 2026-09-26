@@ -112,7 +112,6 @@ class StrafeController {
   float max_;
   std::optional<float> relative_min_;
   std::optional<float> relative_max_;
-  float initial_position_ = 0;
   float unscaled_acceleration_;
   float absolute_center_;
   float center_ = 0;

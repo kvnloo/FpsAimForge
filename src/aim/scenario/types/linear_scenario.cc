@@ -65,7 +65,6 @@ class LinearMovementController : public BasicWallMovementController {
 
  private:
   Wall wall_;
-  bool direction_initialized_ = false;
   float radius_ = 0;
 };
 

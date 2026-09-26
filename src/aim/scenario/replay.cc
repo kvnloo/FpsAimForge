@@ -13,7 +13,7 @@ ReplayRecorder::ReplayRecorder(const std::string& scenario_name,
                                i32 duration_seconds,
                                i32 num_targets,
                                bool requires_per_frame_target_data)
-    : replay_fps_(replay_fps), num_targets_(num_targets) {
+    : num_targets_(num_targets) {
   replay_ = std::make_shared<Replay>();
   replay_->scenario_name = scenario_name;
   replay_->room = room;

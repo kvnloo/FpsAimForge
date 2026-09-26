@@ -8,9 +8,9 @@
 #include "aim/common/simple_types.h"
 #include "aim/proto/common.pb.h"
 #include "glm/ext/scalar_common.hpp"  // IWYU pragma: keep
-#include "glm/vec2.hpp"  // IWYU pragma: keep
-#include "glm/vec3.hpp"  // IWYU pragma: keep
-#include "glm/vec4.hpp"  // IWYU pragma: keep
+#include "glm/vec2.hpp"               // IWYU pragma: keep
+#include "glm/vec3.hpp"               // IWYU pragma: keep
+#include "glm/vec4.hpp"               // IWYU pragma: keep
 #include "imgui.h"
 
 namespace aim {

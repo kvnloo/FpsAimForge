@@ -5,7 +5,8 @@
 #include "aim/common/simple_types.h"
 
 namespace aim {
-class Replay;
+
+struct Replay;
 
 class ReplayManager {
  public:

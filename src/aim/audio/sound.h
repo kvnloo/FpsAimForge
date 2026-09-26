@@ -29,10 +29,9 @@ class Sound {
   Sound& operator=(Sound&& other) = delete;
 
  private:
-  Sound(MIX_Mixer* mixer, MIX_Audio* audio, std::vector<MIX_Track*> track_queue);
+  Sound(MIX_Audio* audio, std::vector<MIX_Track*> track_queue);
 
   MIX_Audio* audio_;
-  MIX_Mixer* mixer_;
   std::vector<MIX_Track*> track_queue_;
   int current_track_queue_index_ = 0;
 };
