@@ -55,7 +55,7 @@ cmake --build build --target protoc
 ls build/bin/protoc
 ```
 
-To run tests:
+Use test.sh to run tests. It optionally takes a filter. Or run the following commands:
 ```bash
 cmake --build build --target FpsAimForgeTests
 cd build
