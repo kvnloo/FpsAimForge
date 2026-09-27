@@ -91,6 +91,10 @@ elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 
     # /we4062 treats missing enum cases as errors but allows default
     /we4062
+
+    # switch fallthrough
+    /we4670
+    /we5262
     )
 endif ()
 
