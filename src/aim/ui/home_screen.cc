@@ -351,13 +351,7 @@ class HomeScreen : public UiScreen {
       ImGui::TableNextColumn();
 
       if (ImGui::BeginChild("Playlists")) {
-        PlaylistListResult result;
-        playlist_list_component_->Show(&result);
-        if (result.open_playlist.has_value()) {
-          auto playlist = *result.open_playlist;
-          // app_.history_manager().UpdateRecentView(ObjectType::PLAYLIST, playlist.name);
-          app_.playlist_manager().SetCurrentPlaylist(playlist.name);
-        }
+        playlist_list_component_->Show();
       }
       ImGui::EndChild();
 

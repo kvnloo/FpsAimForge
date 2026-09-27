@@ -155,7 +155,7 @@ class PlaylistListComponentImpl : public PlaylistListComponent {
  public:
   explicit PlaylistListComponentImpl() {}
 
-  void Show(PlaylistListResult* result) override {
+  void Show() override {
     if (copy_dialog_.Draw(app_)) {
       app_.bundle_manager().SaveDirtyBundles();
     }
@@ -183,8 +183,7 @@ class PlaylistListComponentImpl : public PlaylistListComponent {
     }
 
     if (browser_result.selected_object_name) {
-      result->open_playlist =
-          app_.playlist_manager().GetPlaylist(*browser_result.selected_object_name);
+      app_.playlist_manager().SetCurrentPlaylist(*browser_result.selected_object_name);
     }
     if (browser_result.edit_object_name) {
       PlaylistEditorOptions opts;

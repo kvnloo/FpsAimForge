@@ -1,7 +1,6 @@
 #pragma once
 
 #include <memory>
-#include <optional>
 #include <string>
 
 #include "aim/core/playlist_manager.h"
@@ -23,16 +22,11 @@ class PlaylistComponent {
 
 std::unique_ptr<PlaylistComponent> CreatePlaylistComponent();
 
-struct PlaylistListResult {
-  std::optional<Playlist> open_playlist{};
-};
-
 class PlaylistListComponent {
  public:
   virtual ~PlaylistListComponent() {}
 
-  // Returns whether to open an individual playlist.
-  virtual void Show(PlaylistListResult* result) = 0;
+  virtual void Show() = 0;
 };
 
 std::unique_ptr<PlaylistListComponent> CreatePlaylistListComponent(UiScreen* screen);
