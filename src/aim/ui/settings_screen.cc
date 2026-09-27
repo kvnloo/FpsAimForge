@@ -336,7 +336,7 @@ class SettingsScreen : public UiScreen {
         ImGui::Indent();
 
         ImGui::InputBool(
-            ImGui::InputBoolParams("OnlyDamaged").set_label("Only damaged"),
+            ImGui::InputBoolParams("OnlyDamaged").set_label("Only when damaged"),
             PROTO_BOOL_FIELD(
                 HealthBarSettings, updater_.settings.mutable_health_bar(), only_damaged));
 
@@ -348,6 +348,8 @@ class SettingsScreen : public UiScreen {
                 .set_default(1)
                 .set_width(char_x_ * 9),
             PROTO_FLOAT_FIELD(HealthBarSettings, updater_.settings.mutable_health_bar(), size));
+        ImGui::SameLine();
+        ImGui::HelpMarker("Adjust within a run by holding \"h\" and using the scroll wheel");
 
         ImGui::Unindent();
       }
