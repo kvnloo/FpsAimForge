@@ -205,24 +205,29 @@ void PlaylistRunRightClickMenu(const std::string& scenario_name, PlaylistRun& ru
   bool is_levels_playlist = run.playlist.def().has_levels();
   auto& app = GetUiApp();
   if (ImGui::BeginPopupContextItem(popup_id)) {
-    if (ImGui::Selectable(std::format("{} Edit", icons::kEdit))) {
+    if (ImGui::Selectable(std::format("{} Edit scenario", icons::kEdit))) {
       ScenarioEditorOptions opts;
       opts.scenario_name = scenario_name;
       app.PushNextScreen(CreateScenarioEditorScreen(opts));
     }
-    if (ImGui::Selectable(std::format("{} Copy", icons::kContentCopy))) {
+    if (ImGui::Selectable(std::format("{} Copy scenario", icons::kContentCopy))) {
       ScenarioEditorOptions opts;
       opts.scenario_name = scenario_name;
       opts.is_new_copy = true;
       app.PushNextScreen(CreateScenarioEditorScreen(opts));
     }
-    if (ImGui::Selectable(std::format("{} View", icons::kSearch))) {
+    if (ImGui::Selectable(std::format("{} View scenario", icons::kSearch))) {
       app.scenario_manager().SetCurrentScenario(scenario_name);
       app.state().go_to_app_screen = AppScreen::SCENARIOS;
     }
+    if (ImGui::Selectable(std::format("{} Edit playlist", icons::kEdit))) {
+      PlaylistEditorOptions opts;
+      opts.name = run.playlist.name;
+      app.PushNextScreen(CreatePlaylistEditorScreen(opts));
+    }
     ImGui::Separator();
     if (!is_levels_playlist) {
-      if (ImGui::Selectable("Add copy")) {
+      if (ImGui::Selectable("Add new scenario")) {
         ScenarioEditorOptions opts;
         opts.scenario_name = scenario_name;
         opts.is_new_copy = true;
@@ -231,7 +236,7 @@ void PlaylistRunRightClickMenu(const std::string& scenario_name, PlaylistRun& ru
         app.PushNextScreen(CreateScenarioEditorScreen(opts));
       }
     }
-    if (ImGui::BeginMenu("Add to")) {
+    if (ImGui::BeginMenu("Add to playlist")) {
       std::string selected_playlist;
       int playlist_count = 0;
       auto recent_playlists = app.history_manager().GetCachedRecentNames(ObjectType::PLAYLIST);

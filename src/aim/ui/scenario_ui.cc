@@ -131,7 +131,7 @@ void DrawScenarioRightClickMenu(const char* popup_id,
   if (ImGui::Selectable("Remove from recents")) {
     app.history_manager().DeleteRecentView(ObjectType::SCENARIO, scenario_name);
   }
-  if (ImGui::BeginMenu("Add to")) {
+  if (ImGui::BeginMenu("Add to playlist")) {
     ImGui::LoopId playlist_loop_id;
     std::string selected_playlist;
     auto recent_playlists = app.history_manager().GetCachedRecentNames(ObjectType::PLAYLIST);
