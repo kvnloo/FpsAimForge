@@ -70,6 +70,24 @@ elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     /w14905      # Wide string literal cast to 'LPSTR'.
     /w14906      # String literal cast to 'LPWSTR'.
     /w14928      # Illegal copy-initialization; applied more than one user-defined conversion.
+
+    /wd4100
+    /wd4091
+    /wd4127
+    /wd4267
+    /wd4244
+    /wd4458
+    /wd4505
+    /wd4702
+    /wd4324
+    /wd4305
+    /wd4242
+    /wd4185
+    /wd4189
+    /wd4457
+    /wd4456
+    /wd4099 # Struct -> Class fwd decl
+    /wd4018
     )
 endif ()
 

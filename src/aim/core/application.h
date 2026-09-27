@@ -25,7 +25,6 @@ class StatsManager;
 class SettingsManager;
 class PlayTimeManager;
 class Renderer;
-class RenderContext;
 class ReplayManager;
 class LocalStore;
 class HistoryManager;
