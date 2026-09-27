@@ -88,6 +88,9 @@ elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     /wd4456
     /wd4099 # Struct -> Class fwd decl
     /wd4018
+
+    # /we4062 treats missing enum cases as errors but allows default
+    /we4062
     )
 endif ()
 
