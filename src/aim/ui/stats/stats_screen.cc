@@ -11,6 +11,7 @@
 #include "aim/common/mat_icons.h"
 #include "aim/common/name_util.h"
 #include "aim/common/proto_util.h"
+#include "aim/common/simple_types.h"
 #include "aim/common/util.h"
 #include "aim/core/perf.h"
 #include "aim/core/replay_manager.h"
@@ -335,8 +336,13 @@ class StatsScreen : public UiScreen {
       PushNextScreen(CreateReplayViewerScreen(replay_, &app_));
     }
     if (performance_stats_) {
-      if (ImGui::Selectable(std::format("{} Perf", icons::kSmartToy).c_str(),
-                            selected_screen_ == SelectedScreen::PERF)) {
+      std::string label = std::format("{} Perf", icons::kSmartToy);
+      if (kIsDebugBuild) {
+        auto& worst_times = performance_stats_->worst_times;
+        float total_ms = (worst_times.end - worst_times.start) / 1000.0;
+        label += "-" + MaybeIntToString(1000 / total_ms, 0);
+      }
+      if (ImGui::Selectable(label.c_str(), selected_screen_ == SelectedScreen::PERF)) {
         selected_screen_ = SelectedScreen::PERF;
       }
     }
