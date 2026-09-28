@@ -199,7 +199,7 @@ class SettingsManagerImpl : public SettingsManager {
     std::vector<std::string> texture_names;
     for (const auto& entry : std::filesystem::directory_iterator(texture_dir_)) {
       std::string filename = entry.path().filename().string();
-      if (std::filesystem::is_regular_file(entry)) {
+      if (std::filesystem::is_regular_file(entry) && filename.ends_with(".png")) {
         texture_names.push_back(filename);
       }
     }
