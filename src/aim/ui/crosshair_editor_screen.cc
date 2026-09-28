@@ -43,10 +43,10 @@ class CrosshairEditorScreen : public UiScreen {
       app_.settings_manager().DeleteCrosshair(*to_delete);
       LoadCrosshairList();
     }
-    if (current_crosshair_name_.size() == 0) {
-      DrawCrosshairListEditor();
-    } else {
+    if (editing_single_crosshair_) {
       DrawCrosshairEditor();
+    } else {
+      DrawCrosshairListEditor();
     }
     ImGui::End();
   }
@@ -68,6 +68,7 @@ class CrosshairEditorScreen : public UiScreen {
     original_crosshair_name_ = name;
     is_new_crosshair_ = false;
     crosshair_ = app_.settings_manager().GetCrosshair(name);
+    editing_single_crosshair_ = true;
   }
 
   void OpenCrosshairCopy(const std::string& name) {
@@ -75,6 +76,7 @@ class CrosshairEditorScreen : public UiScreen {
     original_crosshair_name_ = current_crosshair_name_;
     is_new_crosshair_ = true;
     crosshair_ = app_.settings_manager().GetCrosshair(name);
+    editing_single_crosshair_ = true;
   }
 
   void OpenNewCrosshair() {
@@ -82,6 +84,7 @@ class CrosshairEditorScreen : public UiScreen {
     original_crosshair_name_ = current_crosshair_name_;
     is_new_crosshair_ = true;
     crosshair_ = GetDefaultCrosshair();
+    editing_single_crosshair_ = true;
   }
 
   void DrawCrosshairListEditor() {
@@ -146,6 +149,10 @@ class CrosshairEditorScreen : public UiScreen {
   }
 
   bool SaveCurrentCrosshair() {
+    if (current_crosshair_name_.empty()) {
+      notification_popup_.NotifyOpen("Missing name");
+      return false;
+    }
     bool crosshair_exists = app_.settings_manager().CrosshairExists(current_crosshair_name_);
     bool is_rename = !is_new_crosshair_ && current_crosshair_name_ != original_crosshair_name_;
     if (is_new_crosshair_ || is_rename) {
@@ -180,6 +187,7 @@ class CrosshairEditorScreen : public UiScreen {
     crosshair_ = GetDefaultCrosshair();
     current_crosshair_name_ = "";
     is_new_crosshair_ = false;
+    editing_single_crosshair_ = false;
   }
 
   void DrawCrosshairEditor() {
@@ -502,6 +510,7 @@ class CrosshairEditorScreen : public UiScreen {
   bool is_new_crosshair_ = false;
   ImGui::NotificationPopup notification_popup_{"Notification"};
   ImGui::ConfirmationDialog<std::string> delete_confirmation_dialog_{"DeleteConfirmationDialog"};
+  bool editing_single_crosshair_ = false;
 };
 
 }  // namespace
