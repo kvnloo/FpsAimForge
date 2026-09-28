@@ -291,6 +291,7 @@ void PlaylistRunComponent(const std::string& id, std::shared_ptr<PlaylistRun> ru
       PlaylistRun::ItemHighScore high_score;
       high_score.high_score = stats.high_score_stats.score;
       high_score.epoch_seconds = stats.high_score_stats.epoch_seconds;
+      high_score.mm_per_360 = stats.high_score_stats.mm_per_360;
       return std::optional<PlaylistRun::ItemHighScore>(high_score);
     }
     return std::optional<PlaylistRun::ItemHighScore>();
@@ -303,12 +304,15 @@ void PlaylistRunComponent(const std::string& id, std::shared_ptr<PlaylistRun> ru
   for (const auto& item : progress_items) {
     float level = 0;
     float high_score = 0;
-    std::string high_score_time;
+    std::string help_text;
     auto maybe_high_score = run->high_score_cache.Get(item.item.scenario());
     if (maybe_high_score) {
       high_score = maybe_high_score->high_score;
-      high_score_time = GetHowLongAgoStringFromEpochMicros(
+      std::string high_score_time = GetHowLongAgoStringFromEpochMicros(
           maybe_high_score->epoch_seconds * 1000 * 1000, now_micros);
+
+      help_text = std::format(
+          "{}, {}cm", high_score_time, MaybeIntToString(maybe_high_score->mm_per_360 / 10.0f, 1));
 
       auto scenario_def = app.scenario_manager().GetEvaluatedScenarioDef(item.item.scenario());
       if (scenario_def) {
@@ -320,7 +324,7 @@ void PlaylistRunComponent(const std::string& id, std::shared_ptr<PlaylistRun> ru
     }
     score_levels.push_back(level);
     scores.push_back(high_score);
-    scores_help.push_back(high_score_time);
+    scores_help.push_back(help_text);
   }
 
   ImGuiTableFlags flags =

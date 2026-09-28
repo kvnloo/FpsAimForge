@@ -69,6 +69,7 @@ struct PlaylistRun {
   struct ItemHighScore {
     float high_score;
     i64 epoch_seconds;
+    i16 mm_per_360 = 0;
   };
   LazyCache<ItemHighScore> high_score_cache;
 };
