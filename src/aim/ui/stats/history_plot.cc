@@ -120,6 +120,8 @@ void DrawHistoryPlot(const std::string& id,
             GetHowLongAgoStringFromEpochSeconds(GetNowEpochSeconds(), row.epoch_seconds);
         ImGui::Text(time_ago);
 
+        ImGui::TextFmt("{}cm", MaybeIntToString(row.mm_per_360 / 10.0f, 1));
+
         ImGui::EndTooltip();
 
         ImPlotSpec spec;
