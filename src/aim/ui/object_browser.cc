@@ -49,7 +49,8 @@ static std::string GetViewTypeKey(ObjectType type) {
 
 class ObjectBrowserImpl : public ObjectBrowser {
  public:
-  explicit ObjectBrowserImpl(ObjectType type) : type_(type) {
+  explicit ObjectBrowserImpl(ObjectType type) : type_(type), bundle_names_(SecondsToMicros(0.6)) {
+    bundle_names_.SetLoader([&]() { return app_.bundle_manager().GetBundleNames(); });
     auto maybe_initial_view_type = app_.local_store().GetInt(GetViewTypeKey(type));
     if (maybe_initial_view_type) {
       view_type_ = static_cast<ViewType>(*maybe_initial_view_type);
@@ -79,27 +80,27 @@ class ObjectBrowserImpl : public ObjectBrowser {
 
     ImVec2 char_size = ImGui::CalcTextSize("A");
 
-    auto recents = app_.history_manager().GetCachedRecentNames(type_);
-    if (recents->size() > 0) {
-      ImGui::IdGuard cid("QuickAccess");
-
-      // Draw the 10 most recent items.
-      ImGui::LoopId loop_id;
-      int i = 0;
-      for (const std::string& name : *recents) {
-        if (!ItemExists(name)) {
-          continue;
-        }
-        i++;
-        if (i >= 10) {
-          break;
-        }
-        auto id_guard = loop_id.Get(name);
-        DrawItem(name, result);
-      }
-
-      ImGui::SpacedSeparator();
-    }
+    // auto recents = app_.history_manager().GetCachedRecentNames(type_);
+    // if (recents->size() > 0) {
+    //   ImGui::IdGuard cid("QuickAccess");
+    //
+    //   // Draw the 10 most recent items.
+    //   ImGui::LoopId loop_id;
+    //   int i = 0;
+    //   for (const std::string& name : *recents) {
+    //     if (!ItemExists(name)) {
+    //       continue;
+    //     }
+    //     i++;
+    //     if (i >= 10) {
+    //       break;
+    //     }
+    //     auto id_guard = loop_id.Get(name);
+    //     DrawItem(name, result);
+    //   }
+    //
+    //   ImGui::SpacedSeparator();
+    // }
 
     ImGui::AlignTextToFramePadding();
     ImGui::Text("%s", icons::kFilterList);
@@ -112,6 +113,18 @@ class ObjectBrowserImpl : public ObjectBrowser {
                                 {ViewType::STARRED, "Starred"},
                             })) {
       app_.local_store().PutInt(GetViewTypeKey(type_), (int)view_type_);
+    }
+
+    ImGui::AlignTextToFramePadding();
+    ImGui::Text("Bundle");
+    ImGui::SameLine();
+    ImGui::SimpleDropdown(
+        "BundlePicker", &bundle_name_filter_, bundle_names_.value(), ImGui::GetFrameHeight() * 7);
+    if (!bundle_name_filter_.empty()) {
+      ImGui::SameLine();
+      if (ImGui::ClearButton()) {
+        bundle_name_filter_ = "";
+      }
     }
 
     float available_width = ImGui::GetContentRegionAvail().x;
@@ -139,7 +152,8 @@ class ObjectBrowserImpl : public ObjectBrowser {
     if (new_names != all_names_) {
       all_names_ = new_names;
       UpdateFilteredNames();
-    } else if (search_text_ != handled_search_text_) {
+    } else if (search_text_ != handled_search_text_ ||
+               bundle_name_filter_ != handled_bundle_name_filter_) {
       UpdateFilteredNames();
     }
 
@@ -337,7 +351,8 @@ class ObjectBrowserImpl : public ObjectBrowser {
 
   void UpdateFilteredNames() {
     handled_search_text_ = search_text_;
-    if (search_text_.empty()) {
+    handled_bundle_name_filter_ = bundle_name_filter_;
+    if (search_text_.empty() && bundle_name_filter_.empty()) {
       // All match. Clear the filter.
       filtered_names_indices_ = {};
       return;
@@ -352,9 +367,14 @@ class ObjectBrowserImpl : public ObjectBrowser {
     indices.reserve(all_names_->size());
 
     for (int i = 0; i < all_names_->size(); ++i) {
-      if (StringMatchesSearch((*all_names_)[i], search_words)) {
-        indices.push_back(i);
+      if (!search_text_.empty() && !StringMatchesSearch((*all_names_)[i], search_words)) {
+        continue;
       }
+      if (!bundle_name_filter_.empty() &&
+          !(*all_names_)[i].starts_with(bundle_name_filter_ + " ")) {
+        continue;
+      }
+      indices.push_back(i);
     }
   }
 
@@ -368,6 +388,9 @@ class ObjectBrowserImpl : public ObjectBrowser {
   std::shared_ptr<std::vector<std::string>> all_names_;
   std::optional<std::vector<int>> filtered_names_indices_;
   SelectVariationDialog select_variation_dialog_{"ObjectBrowserVariationDialog"};
+  Lazy<std::vector<std::string>> bundle_names_;
+  std::string bundle_name_filter_;
+  std::string handled_bundle_name_filter_;
 };
 
 }  // namespace

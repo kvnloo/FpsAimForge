@@ -68,4 +68,32 @@ class LazyCache {
   absl::linked_hash_map<std::string, CacheItem> cache_;
 };
 
+template <typename T>
+class Lazy {
+ public:
+  explicit Lazy(i64 refresh_time_micros, std::function<T()> loader)
+      : loader_(std::move(loader)), refresh_time_micros_(refresh_time_micros) {}
+
+  explicit Lazy(i64 refresh_time_micros) : refresh_time_micros_(refresh_time_micros) {}
+
+  void SetLoader(std::function<T()> loader) {
+    loader_ = std::move(loader);
+  }
+
+  const T& value() {
+    i64 now = GetNowEpochMicros();
+    if (now - last_update_time_micros_ > refresh_time_micros_) {
+      value_ = loader_();
+      last_update_time_micros_ = now;
+    }
+    return value_;
+  }
+
+ private:
+  T value_;
+  std::function<T()> loader_;
+  i64 last_update_time_micros_ = -1;
+  i64 refresh_time_micros_;
+};
+
 }  // namespace aim
