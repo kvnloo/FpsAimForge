@@ -218,6 +218,9 @@ class StatsScreen : public UiScreen {
 
  protected:
   void OnAttachUi() override {
+    if (scenario_name_ != app_.scenario_manager().GetCurrentScenarioName()) {
+      app_.scenario_manager().SetCurrentScenario(scenario_name_);
+    }
     playlist_run_ = app_.playlist_manager().GetCurrentRun();
     if (!playlist_run_) {
       return;

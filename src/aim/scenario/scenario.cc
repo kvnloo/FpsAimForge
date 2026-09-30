@@ -657,16 +657,18 @@ void Scenario::HandleScenarioDone() {
 
   std::optional<StatsDbRow> maybe_stats_row = GetStatsRow();
   if (maybe_stats_row) {
-    StatsDbRow stats_row = *maybe_stats_row;
-    app_.stats_manager().AddStats(scenario_name_, &stats_row);
-
-    // Also write the stats for the non fixed cm/360 scenario name
+    // Also write the stats for the non fixed cm/360 scenario name.
+    // Write this version first so that the real run is still considered latest.
     NameInfo name_info = GetNameInfo(scenario_name_);
     if (name_info.cm_per_360) {
       name_info.cm_per_360 = {};
       StatsDbRow other_stats_row = *maybe_stats_row;
       app_.stats_manager().AddStats(name_info.GetFullName(), &other_stats_row);
     }
+
+    StatsDbRow stats_row = *maybe_stats_row;
+    app_.stats_manager().AddStats(scenario_name_, &stats_row);
+
 
     if (replay_) {
       replay_->FillInMissingPitchYaws();
