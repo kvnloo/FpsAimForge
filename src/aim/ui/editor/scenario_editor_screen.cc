@@ -383,7 +383,7 @@ class ScenarioEditorScreen : public UiScreen {
   }
 
   void DrawDetailsEditor() {
-    float duration_seconds = FirstGreaterThanZero(def_.duration_seconds(), 60);
+    float duration_seconds = FirstGreaterThanZero(def_.duration_seconds(), 45);
     ImGui::AlignTextToFramePadding();
     ImGui::Text("Duration");
     ImGui::SameLine();
