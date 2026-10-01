@@ -103,6 +103,7 @@ void BaseScenario::UpdateState(UpdateStateData* data) {
     for (const Target& target : target_manager_.GetTargets()) {
       if (target.ShouldDraw() && target.remove_after_time_seconds < timer_.GetElapsedSeconds()) {
         targets_to_remove.push_back(target.id);
+        PlaySound(SoundType::TARGET_EXPIRED);
       }
     }
   }
@@ -124,6 +125,7 @@ void BaseScenario::UpdateState(UpdateStateData* data) {
       } else {
         if (delta_seconds >= (g.grow_time_seconds + g.time_at_final_size_seconds)) {
           targets_to_remove.push_back(target.id);
+          PlaySound(SoundType::TARGET_EXPIRED);
         }
       }
     }

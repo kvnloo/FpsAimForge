@@ -188,6 +188,7 @@ inline constexpr SoundSettings::Impl_::Impl_(
         tracking_miss_{nullptr},
         tracking_hit_{nullptr},
         tracking_kill_{nullptr},
+        target_expired_{nullptr},
         metronome_{nullptr},
         master_volume_level_{0} {}
 
@@ -421,7 +422,7 @@ const ::uint32_t
         2,
         0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::aim::SoundSettings, _impl_._has_bits_),
-        12, // hasbit index offset
+        13, // hasbit index offset
         PROTOBUF_FIELD_OFFSET(::aim::SoundSettings, _impl_.master_volume_level_),
         PROTOBUF_FIELD_OFFSET(::aim::SoundSettings, _impl_.click_miss_),
         PROTOBUF_FIELD_OFFSET(::aim::SoundSettings, _impl_.click_hit_),
@@ -430,8 +431,9 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::aim::SoundSettings, _impl_.tracking_miss_),
         PROTOBUF_FIELD_OFFSET(::aim::SoundSettings, _impl_.tracking_hit_),
         PROTOBUF_FIELD_OFFSET(::aim::SoundSettings, _impl_.tracking_kill_),
+        PROTOBUF_FIELD_OFFSET(::aim::SoundSettings, _impl_.target_expired_),
         PROTOBUF_FIELD_OFFSET(::aim::SoundSettings, _impl_.metronome_),
-        8,
+        9,
         0,
         1,
         2,
@@ -440,6 +442,7 @@ const ::uint32_t
         5,
         6,
         7,
+        8,
         0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::aim::ScenarioSettings, _impl_._has_bits_),
         12, // hasbit index offset
@@ -521,10 +524,10 @@ static const ::_pbi::MigrationSchema
         {18, sizeof(::aim::Settings)},
         {69, sizeof(::aim::SoundItem)},
         {78, sizeof(::aim::SoundSettings)},
-        {99, sizeof(::aim::ScenarioSettings)},
-        {120, sizeof(::aim::ScenarioSettingsConfig)},
-        {141, sizeof(::aim::KeyMapping)},
-        {152, sizeof(::aim::Keybinds)},
+        {101, sizeof(::aim::ScenarioSettings)},
+        {122, sizeof(::aim::ScenarioSettingsConfig)},
+        {143, sizeof(::aim::KeyMapping)},
+        {154, sizeof(::aim::Keybinds)},
 };
 static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
     &::aim::_HealthBarSettings_default_instance_._instance,
@@ -567,14 +570,15 @@ const char descriptor_table_protodef_settings_2eproto[] ABSL_ATTRIBUTE_SECTION_V
     "it_display_name\030\030 \001(\t\022\'\n\ndb_backups\030\031 \001("
     "\0132\023.aim.BackupSettings\"G\n\tSoundItem\022\014\n\004n"
     "ame\030\001 \001(\t\022\024\n\014volume_level\030\002 \001(\002\022\026\n\016pitch"
-    "_modifier\030\003 \001(\002\"\316\002\n\rSoundSettings\022\033\n\023mas"
+    "_modifier\030\003 \001(\002\"\366\002\n\rSoundSettings\022\033\n\023mas"
     "ter_volume_level\030\001 \001(\002\022\"\n\nclick_miss\030\002 \001"
     "(\0132\016.aim.SoundItem\022!\n\tclick_hit\030\003 \001(\0132\016."
     "aim.SoundItem\022\"\n\nclick_kill\030\004 \001(\0132\016.aim."
     "SoundItem\022\036\n\006reload\030\005 \001(\0132\016.aim.SoundIte"
     "m\022%\n\rtracking_miss\030\006 \001(\0132\016.aim.SoundItem"
     "\022$\n\014tracking_hit\030\007 \001(\0132\016.aim.SoundItem\022%"
-    "\n\rtracking_kill\030\010 \001(\0132\016.aim.SoundItem\022!\n"
+    "\n\rtracking_kill\030\010 \001(\0132\016.aim.SoundItem\022&\n"
+    "\016target_expired\030\t \001(\0132\016.aim.SoundItem\022!\n"
     "\tmetronome\030\014 \001(\0132\016.aim.SoundItem\"\232\002\n\020Sce"
     "narioSettings\022\022\n\ncm_per_360\030\001 \001(\002\022\022\n\nthe"
     "me_name\030\002 \001(\t\022\025\n\rmetronome_bpm\030\003 \001(\002\022\026\n\016"
@@ -623,7 +627,7 @@ static ::absl::once_flag descriptor_table_settings_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_settings_2eproto = {
     false,
     false,
-    2967,
+    3007,
     descriptor_table_protodef_settings_2eproto,
     "settings.proto",
     &descriptor_table_settings_2eproto_once,
@@ -2510,7 +2514,10 @@ SoundSettings::SoundSettings(
   _impl_.tracking_kill_ = (CheckHasBit(cached_has_bits, 0x00000040U))
                 ? ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.tracking_kill_)
                 : nullptr;
-  _impl_.metronome_ = (CheckHasBit(cached_has_bits, 0x00000080U))
+  _impl_.target_expired_ = (CheckHasBit(cached_has_bits, 0x00000080U))
+                ? ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.target_expired_)
+                : nullptr;
+  _impl_.metronome_ = (CheckHasBit(cached_has_bits, 0x00000100U))
                 ? ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.metronome_)
                 : nullptr;
   _impl_.master_volume_level_ = from._impl_.master_volume_level_;
@@ -2549,6 +2556,7 @@ inline void SoundSettings::SharedDtor(MessageLite& self) {
   delete this_._impl_.tracking_miss_;
   delete this_._impl_.tracking_hit_;
   delete this_._impl_.tracking_kill_;
+  delete this_._impl_.target_expired_;
   delete this_._impl_.metronome_;
   this_._impl_.~Impl_();
 }
@@ -2596,17 +2604,17 @@ SoundSettings::GetClassData() const {
   return SoundSettings_class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<4, 9, 8, 0, 2>
+const ::_pbi::TcParseTable<4, 10, 9, 0, 2>
 SoundSettings::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(SoundSettings, _impl_._has_bits_),
     0, // no _extensions_
     12, 120,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294964992,  // skipmap
+    4294964736,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    9,  // num_field_entries
-    8,  // num_aux_entries
+    10,  // num_field_entries
+    9,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     SoundSettings_class_data_.base(),
     nullptr,  // post_loop_handler
@@ -2618,7 +2626,7 @@ SoundSettings::_table_ = {
     {::_pbi::TcParser::MiniParse, {}},
     // float master_volume_level = 1;
     {::_pbi::TcParser::FastF32S1,
-     {13, 8, 0,
+     {13, 9, 0,
       PROTOBUF_FIELD_OFFSET(SoundSettings, _impl_.master_volume_level_)}},
     // .aim.SoundItem click_miss = 2;
     {::_pbi::TcParser::FastMtS1,
@@ -2648,12 +2656,15 @@ SoundSettings::_table_ = {
     {::_pbi::TcParser::FastMtS1,
      {66, 6, 6,
       PROTOBUF_FIELD_OFFSET(SoundSettings, _impl_.tracking_kill_)}},
-    {::_pbi::TcParser::MiniParse, {}},
+    // .aim.SoundItem target_expired = 9;
+    {::_pbi::TcParser::FastMtS1,
+     {74, 7, 7,
+      PROTOBUF_FIELD_OFFSET(SoundSettings, _impl_.target_expired_)}},
     {::_pbi::TcParser::MiniParse, {}},
     {::_pbi::TcParser::MiniParse, {}},
     // .aim.SoundItem metronome = 12;
     {::_pbi::TcParser::FastMtS1,
-     {98, 7, 7,
+     {98, 8, 8,
       PROTOBUF_FIELD_OFFSET(SoundSettings, _impl_.metronome_)}},
     {::_pbi::TcParser::MiniParse, {}},
     {::_pbi::TcParser::MiniParse, {}},
@@ -2662,7 +2673,7 @@ SoundSettings::_table_ = {
     65535, 65535
   }}, {{
     // float master_volume_level = 1;
-    {PROTOBUF_FIELD_OFFSET(SoundSettings, _impl_.master_volume_level_), _Internal::kHasBitsOffset + 8, 0, (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
+    {PROTOBUF_FIELD_OFFSET(SoundSettings, _impl_.master_volume_level_), _Internal::kHasBitsOffset + 9, 0, (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
     // .aim.SoundItem click_miss = 2;
     {PROTOBUF_FIELD_OFFSET(SoundSettings, _impl_.click_miss_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
     // .aim.SoundItem click_hit = 3;
@@ -2677,10 +2688,13 @@ SoundSettings::_table_ = {
     {PROTOBUF_FIELD_OFFSET(SoundSettings, _impl_.tracking_hit_), _Internal::kHasBitsOffset + 5, 5, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
     // .aim.SoundItem tracking_kill = 8;
     {PROTOBUF_FIELD_OFFSET(SoundSettings, _impl_.tracking_kill_), _Internal::kHasBitsOffset + 6, 6, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .aim.SoundItem target_expired = 9;
+    {PROTOBUF_FIELD_OFFSET(SoundSettings, _impl_.target_expired_), _Internal::kHasBitsOffset + 7, 7, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
     // .aim.SoundItem metronome = 12;
-    {PROTOBUF_FIELD_OFFSET(SoundSettings, _impl_.metronome_), _Internal::kHasBitsOffset + 7, 7, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    {PROTOBUF_FIELD_OFFSET(SoundSettings, _impl_.metronome_), _Internal::kHasBitsOffset + 8, 8, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }},
   {{
+      {::_pbi::TcParser::GetTable<::aim::SoundItem>()},
       {::_pbi::TcParser::GetTable<::aim::SoundItem>()},
       {::_pbi::TcParser::GetTable<::aim::SoundItem>()},
       {::_pbi::TcParser::GetTable<::aim::SoundItem>()},
@@ -2731,9 +2745,13 @@ PROTOBUF_NOINLINE void SoundSettings::Clear() {
       _impl_.tracking_kill_->Clear();
     }
     if (CheckHasBit(cached_has_bits, 0x00000080U)) {
-      ABSL_DCHECK(_impl_.metronome_ != nullptr);
-      _impl_.metronome_->Clear();
+      ABSL_DCHECK(_impl_.target_expired_ != nullptr);
+      _impl_.target_expired_->Clear();
     }
+  }
+  if (CheckHasBit(cached_has_bits, 0x00000100U)) {
+    ABSL_DCHECK(_impl_.metronome_ != nullptr);
+    _impl_.metronome_->Clear();
   }
   _impl_.master_volume_level_ = 0;
   _impl_._has_bits_.Clear();
@@ -2760,7 +2778,7 @@ PROTOBUF_NOINLINE void SoundSettings::Clear() {
 
   cached_has_bits = this_._impl_._has_bits_[0];
   // float master_volume_level = 1;
-  if (CheckHasBit(cached_has_bits, 0x00000100U)) {
+  if (CheckHasBit(cached_has_bits, 0x00000200U)) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteFloatToArray(
         1, this_._internal_master_volume_level(), target);
@@ -2815,8 +2833,15 @@ PROTOBUF_NOINLINE void SoundSettings::Clear() {
         stream);
   }
 
-  // .aim.SoundItem metronome = 12;
+  // .aim.SoundItem target_expired = 9;
   if (CheckHasBit(cached_has_bits, 0x00000080U)) {
+    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+        9, *this_._impl_.target_expired_, this_._impl_.target_expired_->GetCachedSize(), target,
+        stream);
+  }
+
+  // .aim.SoundItem metronome = 12;
+  if (CheckHasBit(cached_has_bits, 0x00000100U)) {
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         12, *this_._impl_.metronome_, this_._impl_.metronome_->GetCachedSize(), target,
         stream);
@@ -2847,7 +2872,7 @@ PROTOBUF_NOINLINE void SoundSettings::Clear() {
 
   ::_pbi::Prefetch5LinesFrom7Lines(&this_);
   cached_has_bits = this_._impl_._has_bits_[0];
-  total_size += static_cast<bool>(0x00000100U & cached_has_bits) * 5;
+  total_size += static_cast<bool>(0x00000200U & cached_has_bits) * 5;
   if (BatchCheckHasBit(cached_has_bits, 0x000000ffU)) {
     // .aim.SoundItem click_miss = 2;
     if (CheckHasBit(cached_has_bits, 0x00000001U)) {
@@ -2884,8 +2909,15 @@ PROTOBUF_NOINLINE void SoundSettings::Clear() {
       total_size += 1 +
                     ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.tracking_kill_);
     }
-    // .aim.SoundItem metronome = 12;
+    // .aim.SoundItem target_expired = 9;
     if (CheckHasBit(cached_has_bits, 0x00000080U)) {
+      total_size += 1 +
+                    ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.target_expired_);
+    }
+  }
+   {
+    // .aim.SoundItem metronome = 12;
+    if (CheckHasBit(cached_has_bits, 0x00000100U)) {
       total_size += 1 +
                     ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.metronome_);
     }
@@ -2967,6 +2999,16 @@ void SoundSettings::MergeImpl(::google::protobuf::MessageLite& to_msg,
       }
     }
     if (CheckHasBit(cached_has_bits, 0x00000080U)) {
+      ABSL_DCHECK(from._impl_.target_expired_ != nullptr);
+      if (_this->_impl_.target_expired_ == nullptr) {
+        _this->_impl_.target_expired_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.target_expired_);
+      } else {
+        _this->_impl_.target_expired_->MergeFrom(*from._impl_.target_expired_);
+      }
+    }
+  }
+  if (BatchCheckHasBit(cached_has_bits, 0x00000300U)) {
+    if (CheckHasBit(cached_has_bits, 0x00000100U)) {
       ABSL_DCHECK(from._impl_.metronome_ != nullptr);
       if (_this->_impl_.metronome_ == nullptr) {
         _this->_impl_.metronome_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.metronome_);
@@ -2974,9 +3016,9 @@ void SoundSettings::MergeImpl(::google::protobuf::MessageLite& to_msg,
         _this->_impl_.metronome_->MergeFrom(*from._impl_.metronome_);
       }
     }
-  }
-  if (CheckHasBit(cached_has_bits, 0x00000100U)) {
-    _this->_impl_.master_volume_level_ = from._impl_.master_volume_level_;
+    if (CheckHasBit(cached_has_bits, 0x00000200U)) {
+      _this->_impl_.master_volume_level_ = from._impl_.master_volume_level_;
+    }
   }
   _this->_impl_._has_bits_[0] |= cached_has_bits;
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(

@@ -22,6 +22,7 @@ enum class SoundType : u16 {
   TRACKING_HIT = 6,
   TRACKING_KILL = 7,
   METRONOME = 8,
+  TARGET_EXPIRED = 9,
 };
 
 // Gain of the shoot sound when played with the hit. Allows the hit sound to be more prominent.

@@ -1537,6 +1537,7 @@ class SoundSettings final : public ::google::protobuf::Message
     kTrackingMissFieldNumber = 6,
     kTrackingHitFieldNumber = 7,
     kTrackingKillFieldNumber = 8,
+    kTargetExpiredFieldNumber = 9,
     kMetronomeFieldNumber = 12,
     kMasterVolumeLevelFieldNumber = 1,
   };
@@ -1645,6 +1646,21 @@ class SoundSettings final : public ::google::protobuf::Message
   ::aim::SoundItem* PROTOBUF_NONNULL _internal_mutable_tracking_kill();
 
   public:
+  // .aim.SoundItem target_expired = 9;
+  bool has_target_expired() const;
+  void clear_target_expired() ;
+  const ::aim::SoundItem& target_expired() const;
+  [[nodiscard]] ::aim::SoundItem* PROTOBUF_NULLABLE release_target_expired();
+  ::aim::SoundItem* PROTOBUF_NONNULL mutable_target_expired();
+  void set_allocated_target_expired(::aim::SoundItem* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_target_expired(::aim::SoundItem* PROTOBUF_NULLABLE value);
+  ::aim::SoundItem* PROTOBUF_NULLABLE unsafe_arena_release_target_expired();
+
+  private:
+  const ::aim::SoundItem& _internal_target_expired() const;
+  ::aim::SoundItem* PROTOBUF_NONNULL _internal_mutable_target_expired();
+
+  public:
   // .aim.SoundItem metronome = 12;
   bool has_metronome() const;
   void clear_metronome() ;
@@ -1675,8 +1691,8 @@ class SoundSettings final : public ::google::protobuf::Message
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<4, 9,
-                                   8, 0,
+  static const ::google::protobuf::internal::TcParseTable<4, 10,
+                                   9, 0,
                                    2>
       _table_;
 
@@ -1704,6 +1720,7 @@ class SoundSettings final : public ::google::protobuf::Message
     ::aim::SoundItem* PROTOBUF_NULLABLE tracking_miss_;
     ::aim::SoundItem* PROTOBUF_NULLABLE tracking_hit_;
     ::aim::SoundItem* PROTOBUF_NULLABLE tracking_kill_;
+    ::aim::SoundItem* PROTOBUF_NULLABLE target_expired_;
     ::aim::SoundItem* PROTOBUF_NULLABLE metronome_;
     float master_volume_level_;
     PROTOBUF_TSAN_DECLARE_MEMBER
@@ -4329,14 +4346,14 @@ inline void SoundItem::_internal_set_pitch_modifier(float value) {
 
 // float master_volume_level = 1;
 inline bool SoundSettings::has_master_volume_level() const {
-  bool value = CheckHasBit(_impl_._has_bits_[0], 0x00000100U);
+  bool value = CheckHasBit(_impl_._has_bits_[0], 0x00000200U);
   return value;
 }
 inline void SoundSettings::clear_master_volume_level() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.master_volume_level_ = 0;
   ClearHasBit(_impl_._has_bits_[0],
-                  0x00000100U);
+                  0x00000200U);
 }
 inline float SoundSettings::master_volume_level() const {
   // @@protoc_insertion_point(field_get:aim.SoundSettings.master_volume_level)
@@ -4344,7 +4361,7 @@ inline float SoundSettings::master_volume_level() const {
 }
 inline void SoundSettings::set_master_volume_level(float value) {
   _internal_set_master_volume_level(value);
-  SetHasBit(_impl_._has_bits_[0], 0x00000100U);
+  SetHasBit(_impl_._has_bits_[0], 0x00000200U);
   // @@protoc_insertion_point(field_set:aim.SoundSettings.master_volume_level)
 }
 inline float SoundSettings::_internal_master_volume_level() const {
@@ -5049,9 +5066,108 @@ inline void SoundSettings::set_allocated_tracking_kill(::aim::SoundItem* PROTOBU
   // @@protoc_insertion_point(field_set_allocated:aim.SoundSettings.tracking_kill)
 }
 
+// .aim.SoundItem target_expired = 9;
+inline bool SoundSettings::has_target_expired() const {
+  bool value = CheckHasBit(_impl_._has_bits_[0], 0x00000080U);
+  PROTOBUF_ASSUME(!value || _impl_.target_expired_ != nullptr);
+  return value;
+}
+inline void SoundSettings::clear_target_expired() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.target_expired_ != nullptr) _impl_.target_expired_->Clear();
+  ClearHasBit(_impl_._has_bits_[0],
+                  0x00000080U);
+}
+inline const ::aim::SoundItem& SoundSettings::_internal_target_expired() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::aim::SoundItem* p = _impl_.target_expired_;
+  return p != nullptr ? *p : reinterpret_cast<const ::aim::SoundItem&>(::aim::_SoundItem_default_instance_);
+}
+inline const ::aim::SoundItem& SoundSettings::target_expired() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:aim.SoundSettings.target_expired)
+  return _internal_target_expired();
+}
+inline void SoundSettings::unsafe_arena_set_allocated_target_expired(
+    ::aim::SoundItem* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.target_expired_);
+  }
+  _impl_.target_expired_ = reinterpret_cast<::aim::SoundItem*>(value);
+  if (value != nullptr) {
+    SetHasBit(_impl_._has_bits_[0], 0x00000080U);
+  } else {
+    ClearHasBit(_impl_._has_bits_[0], 0x00000080U);
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:aim.SoundSettings.target_expired)
+}
+inline ::aim::SoundItem* PROTOBUF_NULLABLE SoundSettings::release_target_expired() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  ClearHasBit(_impl_._has_bits_[0], 0x00000080U);
+  ::aim::SoundItem* released = _impl_.target_expired_;
+  _impl_.target_expired_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::aim::SoundItem* PROTOBUF_NULLABLE SoundSettings::unsafe_arena_release_target_expired() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:aim.SoundSettings.target_expired)
+
+  ClearHasBit(_impl_._has_bits_[0], 0x00000080U);
+  ::aim::SoundItem* temp = _impl_.target_expired_;
+  _impl_.target_expired_ = nullptr;
+  return temp;
+}
+inline ::aim::SoundItem* PROTOBUF_NONNULL SoundSettings::_internal_mutable_target_expired() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.target_expired_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::aim::SoundItem>(GetArena());
+    _impl_.target_expired_ = reinterpret_cast<::aim::SoundItem*>(p);
+  }
+  return _impl_.target_expired_;
+}
+inline ::aim::SoundItem* PROTOBUF_NONNULL SoundSettings::mutable_target_expired()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  SetHasBit(_impl_._has_bits_[0], 0x00000080U);
+  ::aim::SoundItem* _msg = _internal_mutable_target_expired();
+  // @@protoc_insertion_point(field_mutable:aim.SoundSettings.target_expired)
+  return _msg;
+}
+inline void SoundSettings::set_allocated_target_expired(::aim::SoundItem* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.target_expired_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = value->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    SetHasBit(_impl_._has_bits_[0], 0x00000080U);
+  } else {
+    ClearHasBit(_impl_._has_bits_[0], 0x00000080U);
+  }
+
+  _impl_.target_expired_ = reinterpret_cast<::aim::SoundItem*>(value);
+  // @@protoc_insertion_point(field_set_allocated:aim.SoundSettings.target_expired)
+}
+
 // .aim.SoundItem metronome = 12;
 inline bool SoundSettings::has_metronome() const {
-  bool value = CheckHasBit(_impl_._has_bits_[0], 0x00000080U);
+  bool value = CheckHasBit(_impl_._has_bits_[0], 0x00000100U);
   PROTOBUF_ASSUME(!value || _impl_.metronome_ != nullptr);
   return value;
 }
@@ -5059,7 +5175,7 @@ inline void SoundSettings::clear_metronome() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (_impl_.metronome_ != nullptr) _impl_.metronome_->Clear();
   ClearHasBit(_impl_._has_bits_[0],
-                  0x00000080U);
+                  0x00000100U);
 }
 inline const ::aim::SoundItem& SoundSettings::_internal_metronome() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
@@ -5078,16 +5194,16 @@ inline void SoundSettings::unsafe_arena_set_allocated_metronome(
   }
   _impl_.metronome_ = reinterpret_cast<::aim::SoundItem*>(value);
   if (value != nullptr) {
-    SetHasBit(_impl_._has_bits_[0], 0x00000080U);
+    SetHasBit(_impl_._has_bits_[0], 0x00000100U);
   } else {
-    ClearHasBit(_impl_._has_bits_[0], 0x00000080U);
+    ClearHasBit(_impl_._has_bits_[0], 0x00000100U);
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:aim.SoundSettings.metronome)
 }
 inline ::aim::SoundItem* PROTOBUF_NULLABLE SoundSettings::release_metronome() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
 
-  ClearHasBit(_impl_._has_bits_[0], 0x00000080U);
+  ClearHasBit(_impl_._has_bits_[0], 0x00000100U);
   ::aim::SoundItem* released = _impl_.metronome_;
   _impl_.metronome_ = nullptr;
   if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
@@ -5107,7 +5223,7 @@ inline ::aim::SoundItem* PROTOBUF_NULLABLE SoundSettings::unsafe_arena_release_m
   ::google::protobuf::internal::TSanWrite(&_impl_);
   // @@protoc_insertion_point(field_release:aim.SoundSettings.metronome)
 
-  ClearHasBit(_impl_._has_bits_[0], 0x00000080U);
+  ClearHasBit(_impl_._has_bits_[0], 0x00000100U);
   ::aim::SoundItem* temp = _impl_.metronome_;
   _impl_.metronome_ = nullptr;
   return temp;
@@ -5122,7 +5238,7 @@ inline ::aim::SoundItem* PROTOBUF_NONNULL SoundSettings::_internal_mutable_metro
 }
 inline ::aim::SoundItem* PROTOBUF_NONNULL SoundSettings::mutable_metronome()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  SetHasBit(_impl_._has_bits_[0], 0x00000080U);
+  SetHasBit(_impl_._has_bits_[0], 0x00000100U);
   ::aim::SoundItem* _msg = _internal_mutable_metronome();
   // @@protoc_insertion_point(field_mutable:aim.SoundSettings.metronome)
   return _msg;
@@ -5139,9 +5255,9 @@ inline void SoundSettings::set_allocated_metronome(::aim::SoundItem* PROTOBUF_NU
     if (message_arena != submessage_arena) {
       value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
     }
-    SetHasBit(_impl_._has_bits_[0], 0x00000080U);
+    SetHasBit(_impl_._has_bits_[0], 0x00000100U);
   } else {
-    ClearHasBit(_impl_._has_bits_[0], 0x00000080U);
+    ClearHasBit(_impl_._has_bits_[0], 0x00000100U);
   }
 
   _impl_.metronome_ = reinterpret_cast<::aim::SoundItem*>(value);

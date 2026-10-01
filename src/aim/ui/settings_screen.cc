@@ -644,17 +644,26 @@ class SettingsScreen : public UiScreen {
 
     ImGui::SpacedSeparator();
 
-    if (ImGui::BeginTable("SoundsColumns", 2)) {
-      ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthFixed, char_x_ * 10);
+    ImGuiTableFlags flags =
+        ImGuiTableFlags_RowBg | ImGuiTableFlags_BordersV | ImGuiTableFlags_Borders;
+    if (ImGui::BeginTable("SoundsColumns", 4, flags)) {
+      ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthFixed, char_x_ * 16);
+      ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthStretch);
+      ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthStretch);
       ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthStretch);
 
-      auto sound_input = [this, char_x](const std::string& label, SoundItem* item) {
+      auto sound_input = [this, char_x](
+                             const std::string& label, const std::string& help, SoundItem* item) {
         ImGui::IdGuard cid(label);
         ImGui::TableNextRow();
         ImGui::TableNextColumn();
 
         ImGui::AlignTextToFramePadding();
         ImGui::Text(label);
+        if (!help.empty()) {
+          ImGui::SameLine();
+          ImGui::HelpMarker(help);
+        }
 
         std::string* sound_name = item->mutable_name();
 
@@ -671,7 +680,7 @@ class SettingsScreen : public UiScreen {
           sound_input_dialog_.NotifyOpen(sound_name, app_);
         }
 
-        ImGui::SameLine();
+        ImGui::TableNextColumn();
         ImGui::AlignTextToFramePadding();
         ImGui::Text("Volume level");
         ImGui::SameLine();
@@ -688,7 +697,7 @@ class SettingsScreen : public UiScreen {
           item->clear_volume_level();
         }
 
-        ImGui::SameLine();
+        ImGui::TableNextColumn();
         ImGui::InputFloat(ImGui::InputFloatParams::WithLabelAsId("Pitch modifier")
                               .set_is_optional()
                               .set_range(0.01, 100)
@@ -698,16 +707,20 @@ class SettingsScreen : public UiScreen {
                           PROTO_FLOAT_FIELD(SoundItem, item, pitch_modifier));
       };
 
-      sound_input("Click miss", s.mutable_click_miss());
-      sound_input("Click hit", s.mutable_click_hit());
-      sound_input("Click kill", s.mutable_click_kill());
+      sound_input("Click miss", "", s.mutable_click_miss());
+      sound_input("Click hit", "", s.mutable_click_hit());
+      sound_input("Click kill", "", s.mutable_click_kill());
 
-      sound_input("Tracking miss", s.mutable_tracking_miss());
-      sound_input("Tracking hit", s.mutable_tracking_hit());
-      sound_input("Tracking kill", s.mutable_tracking_kill());
+      sound_input("Tracking miss", "", s.mutable_tracking_miss());
+      sound_input("Tracking hit", "", s.mutable_tracking_hit());
+      sound_input("Tracking kill", "", s.mutable_tracking_kill());
 
-      sound_input("Metronome", s.mutable_metronome());
-      sound_input("Reload", s.mutable_reload());
+      sound_input("Metronome", "", s.mutable_metronome());
+      sound_input("Reload", "", s.mutable_reload());
+      sound_input(
+          "Target expired",
+          "Sound played when a target is removed due to time expiring. (Pulse, Reflex sceanarios)",
+          s.mutable_target_expired());
 
       ImGui::EndTable();
     }

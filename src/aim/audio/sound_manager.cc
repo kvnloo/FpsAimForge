@@ -67,6 +67,7 @@ void SoundManager::LoadSounds(const Settings& settings) {
       s.tracking_kill(),
       s.metronome(),
       s.reload(),
+      s.target_expired(),
   };
   for (const SoundItem& item : sounds) {
     if (item.name().size() == 0) {
@@ -131,6 +132,8 @@ bool SoundManager::PlayLoadedSound(const SoundSettings& settings, SoundType type
       return PlayLoadedSound(settings.metronome(), gain);
     case SoundType::RELOAD:
       return PlayLoadedSound(settings.reload(), gain);
+    case SoundType::TARGET_EXPIRED:
+      return PlayLoadedSound(settings.target_expired(), gain);
   }
   return false;
 }

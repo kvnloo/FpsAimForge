@@ -104,6 +104,9 @@ message SoundSettings {
   SoundItem tracking_hit = 7;
   SoundItem tracking_kill = 8;
 
+  // Sound played when a target is removed when time expires.
+  SoundItem target_expired = 9;
+
   SoundItem metronome = 12;
 }
 
