@@ -20,6 +20,8 @@ struct TimeSpan {
   }
 };
 
+i64 ElapsedMicrosBetweenNanos(u64 start_ns, u64 end_ns);
+
 struct TimeTrace {
   TimeTrace() {
     traces_.reserve(20);
@@ -54,6 +56,12 @@ struct FrameTimes {
 
   i64 events_count = 0;
   i64 mouse_events_count = 0;
+
+  // Age of the newest mouse-motion event at software pipeline boundaries.
+  // These use SDL's monotonic event timestamp clock and are not input-to-photon measurements.
+  i64 mouse_event_to_dispatch_micros = 0;
+  i64 mouse_event_to_update_end_micros = 0;
+  i64 mouse_event_to_submit_micros = 0;
 
   TimeSpan render;
   TimeSpan build_draw_data;
@@ -106,6 +114,9 @@ struct RunPerformanceStats {
   TimeHistogram render_time_histogram{};
   TimeHistogram update_time_histogram{};
   TimeHistogram events_time_histogram{};
+  TimeHistogram mouse_event_to_dispatch_histogram{};
+  TimeHistogram mouse_event_to_update_end_histogram{};
+  TimeHistogram mouse_event_to_submit_histogram{};
 };
 
 void DumpHistogram(const TimeHistogram& h);
