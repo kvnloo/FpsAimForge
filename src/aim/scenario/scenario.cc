@@ -646,9 +646,9 @@ void Scenario::OnRunningTick() {
                                  look_at_,
                                  &ctx);
 
-  if (latest_mouse_event_timestamp_ns_ > 0) {
+  if (latest_mouse_event_timestamp_ns_ > 0 && ctx.submit_timestamp_ns > 0) {
     current_times_.mouse_event_to_submit_micros =
-        ElapsedMicrosBetweenNanos(latest_mouse_event_timestamp_ns_, SDL_GetTicksNS());
+        ElapsedMicrosBetweenNanos(latest_mouse_event_timestamp_ns_, ctx.submit_timestamp_ns);
   }
   current_times_.render.end = timer_.GetElapsedMicros();
   UpdatePerfStats();
