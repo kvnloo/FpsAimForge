@@ -389,6 +389,7 @@ class RendererImpl : public Renderer {
     if (ctx->swapchain_texture == nullptr) {
       ctx->times->submit_swapchain_command_buffer = ctx->stopwatch->GetElapsedMicros();
       SDL_SubmitGPUCommandBuffer(ctx->command_buffer);
+      ctx->submit_timestamp_ns = SDL_GetTicksNS();
       ctx->times->start_render.end = ctx->stopwatch->GetElapsedMicros();
       return false;
     }
@@ -431,6 +432,7 @@ class RendererImpl : public Renderer {
 
     ctx->times->finish_render_submit_command_buffer = ctx->stopwatch->GetElapsedMicros();
     SDL_SubmitGPUCommandBuffer(ctx->command_buffer);
+    ctx->submit_timestamp_ns = SDL_GetTicksNS();
 
     ctx->times->finish_render.end = ctx->stopwatch->GetElapsedMicros();
   }
