@@ -27,6 +27,7 @@ struct RenderContext {
   SDL_GPURenderPass* render_pass = nullptr;
   const Stopwatch* stopwatch = nullptr;
   FrameTimes* times = nullptr;
+  u64 submit_timestamp_ns = 0;
 
  private:
   Stopwatch default_stopwatch_;
