@@ -32,8 +32,8 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang
       # -Wswitch-default              # A switch statement does not have a default case.
       # -Wdouble-promotion          # Warn about implicit conversions from "float" to "double".
       -Wdate-time                 # Warn when encountering macros that might prevent bit-wise-identical compilations.
-      -Wsuggest-final-methods     # Virtual methods that could be declared final or in an anonymous namespace.
-      -Wsuggest-final-types       # Types with virtual methods that can be declared final or in an anonymous namespace.
+      # -Wsuggest-final-methods     # Virtual methods that could be declared final or in an anonymous namespace.
+      # -Wsuggest-final-types       # Types with virtual methods that can be declared final or in an anonymous namespace.
       -Wduplicated-cond           # Warn about duplicated conditions in an if-else-if chain.
       -Wmisleading-indentation    # Warn when indentation does not reflect the block structure.
       -Wnull-dereference          # Dereferencing a pointer may lead to undefined behavior.
