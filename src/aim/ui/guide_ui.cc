@@ -3,8 +3,6 @@
 #include <deque>
 #include <string>
 
-#include "absl/algorithm/container.h"
-#include "absl/container/linked_hash_map.h"
 #include "aim/common/imgui_ext.h"
 #include "aim/common/lazy_cache.h"
 #include "aim/common/mat_icons.h"
@@ -191,6 +189,7 @@ class GuidesComponentImpl : public GuidesComponent {
     std::string updated_guide_variation_name;
     if (select_variation_dialog_.Draw(&updated_guide_variation_name)) {
       app_.guide_manager().SetCurrentGuide(updated_guide_variation_name);
+      app_.history_manager().UpdateRecentView(ObjectType::GUIDE, updated_guide_variation_name);
     }
 
     {
@@ -317,6 +316,7 @@ class GuidesComponentImpl : public GuidesComponent {
     viewer_.Draw(*guide, &result);
     if (result.selected_guide) {
       app_.guide_manager().SetCurrentGuide(*result.selected_guide);
+      app_.history_manager().UpdateRecentView(ObjectType::GUIDE, *result.selected_guide);
     }
     *current_playlist_selected = result.current_playlist_selected;
   }
