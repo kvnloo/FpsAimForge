@@ -1248,6 +1248,89 @@
    }
   },
   {
+   "name": "CassidyClick",
+   "def": {
+    "description": "Rate limited multiclick on a strafing target. No accuracy penalty.",
+    "durationSeconds": 45,
+    "shotType": {
+     "clickMulti": true,
+     "healthClicks": 1000,
+     "clickRateSeconds": 0.5,
+     "reload": {
+      "maxShots": 1000,
+      "numToReloadOnHit": 1000,
+      "reloadTime": 0.5
+     },
+     "accuracyPenalty": "ACCURACY_PENALTY_NONE"
+    },
+    "targetDef": {
+     "numTargets": 1,
+     "profiles": [
+      {
+       "targetRadius": 2.3,
+       "speed": 108,
+       "acceleration": 205
+      }
+     ]
+    },
+    "room": {
+     "cameraPosition": {
+      "x": 0,
+      "y": -200,
+      "z": 0
+     },
+     "simpleRoom": {
+      "height": 130,
+      "width": 150
+     }
+    },
+    "levelOverrides": {
+     "targetRadiusMultiplier": 0.96
+    },
+    "strafeDef": {
+     "leftRightProfiles": [
+      {
+       "info": {
+        "weight": 6
+       },
+       "distance": {
+        "xPercentValue": 0.15
+       },
+       "distanceJitter": {
+        "xPercentValue": 0.065
+       },
+       "speedMultiplier": 1,
+       "speedMultiplierJitter": 0.25
+      },
+      {
+       "info": {
+        "description": "Short",
+        "weight": 3
+       },
+       "distance": {
+        "xPercentValue": 0.06
+       },
+       "distanceJitter": {
+        "xPercentValue": 0.02
+       }
+      },
+      {
+       "info": {
+        "description": "Pause",
+        "weight": 1
+       },
+       "time": 0.3,
+       "timeJitter": 0.1,
+       "speedMultiplier": 0.01
+      }
+     ],
+     "leftRightInitialDirection": "DIRECTION_RANDOM",
+     "upDownInitialDirection": "DIRECTION_RANDOM",
+     "forwardBackInitialDirection": "DIRECTION_RANDOM"
+    }
+   }
+  },
+  {
    "name": "Centering",
    "def": {
     "durationSeconds": 40,
@@ -1802,6 +1885,185 @@
    }
   },
   {
+   "name": "DriftClick",
+   "def": {
+    "durationSeconds": 45,
+    "shotType": {
+     "clickSingle": true,
+     "accuracyPenalty": "ACCURACY_PENALTY_SQRT"
+    },
+    "targetDef": {
+     "numTargets": 3,
+     "profiles": [
+      {
+       "targetRadius": 2.75,
+       "targetRadiusJitter": 0.3,
+       "speed": 60,
+       "acceleration": 10
+      }
+     ]
+    },
+    "room": {
+     "cameraPosition": {
+      "x": 0,
+      "y": -400,
+      "z": 0
+     },
+     "simpleRoom": {
+      "height": 142,
+      "width": 207
+     }
+    },
+    "levelOverrides": {
+     "targetRadiusMultiplier": 0.96
+    },
+    "strafeDef": {
+     "targetPlacementStrategy": {
+      "regions": [
+       {
+        "depth": {
+         "depthPercentValue": 0.11
+        },
+        "depthJitter": {
+         "depthPercentValue": 0.12
+        },
+        "rectangle": {
+         "xLength": {
+          "xPercentValue": 0.56
+         },
+         "yLength": {
+          "yPercentValue": 0.55
+         }
+        }
+       }
+      ],
+      "minDistance": {
+       "xPercentValue": 0.12
+      }
+     },
+     "leftRightProfiles": [
+      {
+       "distance": {
+        "xPercentValue": 0.43
+       },
+       "distanceJitter": {
+        "xPercentValue": 0.085
+       },
+       "accelerationMultiplier": 1.01,
+       "accelerationMultiplierJitter": 0.06,
+       "startSpeedPercent": 0.15
+      }
+     ],
+     "forwardBackProfiles": [
+      {
+       "distance": {
+        "depthPercentValue": 0.55
+       },
+       "distanceJitter": {
+        "depthPercentValue": 0.06
+       },
+       "speedMultiplier": 0.23,
+       "accelerationMultiplier": 0.56
+      }
+     ],
+     "upDownProfiles": [
+      {
+       "distance": {
+        "yPercentValue": 0.54
+       },
+       "distanceJitter": {
+        "yPercentValue": 0.065
+       },
+       "speedMultiplier": 0.65,
+       "accelerationMultiplier": 0.52
+      }
+     ],
+     "leftRightInitialDirection": "DIRECTION_RANDOM",
+     "upDownInitialDirection": "DIRECTION_RANDOM",
+     "forwardBackInitialDirection": "DIRECTION_RANDOM"
+    }
+   }
+  },
+  {
+   "name": "EvasiveStrafe",
+   "def": {
+    "description": "Rate limited multiclick on a strafing target. No accuracy penalty.",
+    "durationSeconds": 30,
+    "shotType": {
+     "trackingInvincible": true
+    },
+    "targetDef": {
+     "numTargets": 1,
+     "profiles": [
+      {
+       "targetRadius": 2.6,
+       "speed": 108,
+       "acceleration": 205
+      }
+     ]
+    },
+    "room": {
+     "cameraPosition": {
+      "x": 0,
+      "y": -200,
+      "z": 0
+     },
+     "simpleRoom": {
+      "height": 130,
+      "width": 150
+     }
+    },
+    "levelOverrides": {
+     "targetRadiusMultiplier": 0.96
+    },
+    "scoreTargets": {
+     "targetScore": 55
+    },
+    "strafeDef": {
+     "leftRightProfiles": [
+      {
+       "info": {
+        "weight": 6
+       },
+       "centerBias": 0.1,
+       "distance": {
+        "xPercentValue": 0.15
+       },
+       "distanceJitter": {
+        "xPercentValue": 0.065
+       },
+       "speedMultiplier": 1,
+       "speedMultiplierJitter": 0.25
+      },
+      {
+       "info": {
+        "description": "Short",
+        "weight": 3
+       },
+       "distance": {
+        "xPercentValue": 0.06
+       },
+       "distanceJitter": {
+        "xPercentValue": 0.02
+       }
+      },
+      {
+       "info": {
+        "description": "Pause",
+        "weight": 1
+       },
+       "time": 0.3,
+       "timeJitter": 0.1,
+       "speedMultiplier": 0.01
+      }
+     ],
+     "leftRightInitialDirection": "DIRECTION_RANDOM",
+     "upDownInitialDirection": "DIRECTION_RANDOM",
+     "forwardBackInitialDirection": "DIRECTION_RANDOM"
+    }
+   }
+  },
+  {
    "name": "FireworkClick",
    "def": {
     "durationSeconds": 40,
@@ -2184,6 +2446,113 @@
       "poke": true,
       "pokeKillTimeSeconds": 0.08
      }
+    }
+   }
+  },
+  {
+   "name": "Microshot Avasive",
+   "def": {
+    "durationSeconds": 45,
+    "shotType": {
+     "clickSingle": true,
+     "accuracyPenalty": "ACCURACY_PENALTY_SQRT"
+    },
+    "targetDef": {
+     "numTargets": 2,
+     "profiles": [
+      {
+       "targetRadius": 3.25,
+       "speed": 94,
+       "acceleration": 110
+      }
+     ]
+    },
+    "room": {
+     "cameraPosition": {
+      "x": 0,
+      "y": -400,
+      "z": 0
+     },
+     "simpleRoom": {
+      "height": 126,
+      "width": 122
+     }
+    },
+    "levelOverrides": {
+     "targetRadiusMultiplier": 0.96
+    },
+    "strafeDef": {
+     "relativeBounds": {
+      "width": {
+       "xPercentValue": 0.2
+      },
+      "height": {
+       "yPercentValue": 0.23
+      }
+     },
+     "targetPlacementStrategy": {
+      "regions": [
+       {
+        "depth": {
+         "depthPercentValue": 0.09
+        },
+        "depthJitter": {
+         "depthPercentValue": 0.095
+        },
+        "rectangle": {
+         "xLength": {
+          "xPercentValue": 0.6
+         },
+         "yLength": {
+          "yPercentValue": 0.6
+         }
+        }
+       }
+      ],
+      "minDistance": {
+       "xPercentValue": 0.04
+      }
+     },
+     "leftRightProfiles": [
+      {
+       "distance": {
+        "xPercentValue": 0.13
+       },
+       "distanceJitter": {
+        "xPercentValue": 0.07
+       },
+       "accelerationMultiplier": 1,
+       "accelerationMultiplierJitter": 0.06,
+       "startSpeedPercent": 0.21
+      }
+     ],
+     "upDownProfiles": [
+      {
+       "info": {
+        "weight": 2
+       },
+       "distance": {
+        "yPercentValue": 0.13
+       },
+       "distanceJitter": {
+        "yPercentValue": 0.105
+       },
+       "speedMultiplier": 0.83,
+       "accelerationMultiplier": 0.36
+      },
+      {
+       "info": {
+        "description": "No vert movement",
+        "weight": 1
+       },
+       "time": 0.2,
+       "timeJitter": 0.1,
+       "speedMultiplier": 0.01
+      }
+     ],
+     "leftRightInitialDirection": "DIRECTION_RANDOM",
+     "upDownInitialDirection": "DIRECTION_RANDOM",
+     "forwardBackInitialDirection": "DIRECTION_RANDOM"
     }
    }
   },
@@ -5554,7 +5923,6 @@
   {
    "name": "Dynamic Clicking",
    "def": {
-    "description": "",
     "items": [
      {
       "scenario": "AF BarrelClick",
@@ -5586,6 +5954,10 @@
      },
      {
       "scenario": "AF SwirlPulse",
+      "numPlays": 1
+     },
+     {
+      "scenario": "AF CassidyClick",
       "numPlays": 1
      }
     ]
