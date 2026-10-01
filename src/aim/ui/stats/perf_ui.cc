@@ -96,6 +96,16 @@ void DrawPerformanceStats(const RunPerformanceStats& stats) {
                  stats.top_events_count);
   ImGui::TextFmt("Update time: {:.2f}ms",
                  (worst_times.update_end - worst_times.update_start) / 1000.0);
+  if (worst_times.mouse_event_to_dispatch_micros > 0) {
+    ImGui::TextFmt("Mouse event -> dispatch: {:.2f}ms",
+                   worst_times.mouse_event_to_dispatch_micros / 1000.0);
+    ImGui::TextFmt("Mouse event -> update end: {:.2f}ms",
+                   worst_times.mouse_event_to_update_end_micros / 1000.0);
+    if (worst_times.mouse_event_to_submit_micros > 0) {
+      ImGui::TextFmt("Mouse event -> GPU submit: {:.2f}ms",
+                     worst_times.mouse_event_to_submit_micros / 1000.0);
+    }
+  }
   if (worst_times.render.start > 0) {
     ImGui::TextFmt("Render time: {:.2f}ms", worst_times.render.GetSeconds() * 1000.0);
     ImGui::Indent();
@@ -146,6 +156,24 @@ void DrawPerformanceStats(const RunPerformanceStats& stats) {
   ImGui::Text("Event Times (ms)");
   ImGui::Indent();
   DumpHistogram(stats.events_time_histogram);
+  ImGui::Unindent();
+
+  ImGui::SpacedSeparator();
+  ImGui::Text("Mouse Event -> Dispatch (ms)");
+  ImGui::Indent();
+  DumpHistogram(stats.mouse_event_to_dispatch_histogram);
+  ImGui::Unindent();
+
+  ImGui::SpacedSeparator();
+  ImGui::Text("Mouse Event -> Update End (ms)");
+  ImGui::Indent();
+  DumpHistogram(stats.mouse_event_to_update_end_histogram);
+  ImGui::Unindent();
+
+  ImGui::SpacedSeparator();
+  ImGui::Text("Mouse Event -> GPU Submit (ms)");
+  ImGui::Indent();
+  DumpHistogram(stats.mouse_event_to_submit_histogram);
   ImGui::Unindent();
 }
 
