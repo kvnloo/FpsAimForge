@@ -8,6 +8,7 @@ set(TEST_SOURCES
   "lazy_cache_test.cc"
   "name_util_test.cc"
   "playlist_manager_test.cc"
+  "perf_test.cc"
   "guide_manager_test.cc"
   "scenario_manager_test.cc"
   "textures_test.cc"
