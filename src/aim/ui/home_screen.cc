@@ -1,7 +1,9 @@
 #include "home_screen.h"
 
 #include "SDL3/SDL.h"  // IWYU pragma: keep
+#include "aim/common/files.h"
 #include "aim/common/imgui_ext.h"
+#include "aim/common/log.h"
 #include "aim/common/mat_icons.h"
 #include "aim/common/simple_types.h"
 #include "aim/core/guide_manager.h"
@@ -161,13 +163,20 @@ class HomeScreen : public UiScreen {
     std::optional<ScenarioDef> evaluated_def =
         app_.scenario_manager().GetEvaluatedScenarioDef(current_scenario.name);
     if (!evaluated_def) {
-      // TODO: Error dialog for invalid scenarios.
+      std::string msg = std::format("Unable to evaluate scenario \"{}\".\n{}",
+                                    current_scenario.name,
+                                    MessageToJson(current_scenario.unevaluated_def));
+      Logger::get()->warn("{}", msg);
+      notification_popup_.NotifyOpen(msg);
       return;
     }
     params.def = *evaluated_def;
     std::shared_ptr<Screen> running_scenario = CreateScenario(params);
     if (!running_scenario) {
-      // TODO: Error dialog for invalid scenarios.
+      std::string msg = std::format(
+          "Invalid scenario \"{}\".\n{}", current_scenario.name, MessageToJson(params.def));
+      Logger::get()->warn("{}", msg);
+      notification_popup_.NotifyOpen(msg);
       return;
     }
     app_.scenario_manager().SetCurrentRunningScenario(running_scenario);
@@ -191,6 +200,8 @@ class HomeScreen : public UiScreen {
 
   void DrawScreenInternal() {
     ImGui::IdGuard cid("HomePage");
+
+    notification_popup_.Draw();
 
     std::optional<int> set_dpi = set_dpi_dialog_.Draw();
     if (set_dpi) {
@@ -382,6 +393,7 @@ class HomeScreen : public UiScreen {
   std::unique_ptr<GuidesComponent> guides_component_;
   SetInitialDpiDialog set_dpi_dialog_;
   std::unique_ptr<TopBar> top_bar_ = CreateTopBar();
+  ImGui::NotificationPopup notification_popup_{"Notification"};
 };
 
 }  // namespace
