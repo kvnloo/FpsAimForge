@@ -6401,6 +6401,38 @@
  ],
  "guides": [
   {
+   "name": "Popcorn",
+   "def": {
+    "sections": [
+     {
+      "text": "",
+      "playlists": [
+       "AF Popcorn Ladder",
+       "AF Popcorn Ladder 15cm",
+       "AF Popcorn Ladder 20cm",
+       "AF Popcorn Ladder 25cm",
+       "AF Popcorn Ladder 30cm",
+       "AF Popcorn Ladder 35cm",
+       "AF Popcorn Ladder 40cm",
+       "AF Popcorn Ladder 45cm",
+       "AF Popcorn Ladder 50cm",
+       "AF Popcorn Ladder 55cm",
+       "AF Popcorn Ladder 60cm",
+       "AF Popcorn Ladder 65cm",
+       "AF Popcorn Ladder 70cm"
+      ]
+     },
+     {
+      "text": "\nVariations",
+      "guides": [
+       "AF Popcorn Ladder 80fov",
+       "AF Popcorn Ladder 10%Faster",
+      ]
+     }
+    ]
+   }
+  },
+  {
    "name": "SmoothStrafe",
    "def": {
     "sections": [
