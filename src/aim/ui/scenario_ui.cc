@@ -205,7 +205,7 @@ class ScenariosComponentImpl : public ScenariosComponent {
       // TODO: Add to history?
     }
 
-    ImGuiTableFlags flags = ImGuiTableFlags_SizingStretchProp | ImGuiTableFlags_BordersInnerV;
+    ImGuiTableFlags flags = ImGuiTableFlags_BordersInnerV;
     if (ImGui::BeginTable("ScenarioColumns", 2, flags)) {
       ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthFixed, GetDefaultObjectBrowserWidth());
       ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthStretch);

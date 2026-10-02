@@ -211,6 +211,10 @@ class GuidesComponentImpl : public GuidesComponent {
 
     ImGuiTableFlags flags = ImGuiTableFlags_SizingStretchProp | ImGuiTableFlags_Resizable;
     if (ImGui::BeginTable("GuideColumns", 3, flags)) {
+      ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthStretch);
+      ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthStretch);
+      ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthStretch);
+
       ImGui::TableNextColumn();
       ImGui::BeginChild("GuideBrowserColumn");
       ImGui::Spacing();

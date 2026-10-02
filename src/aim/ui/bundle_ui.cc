@@ -105,7 +105,7 @@ class BundleUiComponentImpl : public BundleUiComponent {
       selected_bundle_name_ = *added_name;
     }
 
-    ImGuiTableFlags flags = ImGuiTableFlags_SizingStretchProp | ImGuiTableFlags_BordersInnerV;
+    ImGuiTableFlags flags = ImGuiTableFlags_BordersInnerV;
     if (ImGui::BeginTable("BundleColumns", 2, flags)) {
       ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthFixed, GetDefaultObjectBrowserWidth());
       ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthStretch);
