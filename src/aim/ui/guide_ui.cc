@@ -309,6 +309,11 @@ class GuidesComponentImpl : public GuidesComponent {
       if (ImGui::Selectable(std::format("{} Select variation", icons::kTune))) {
         select_variation_dialog_.NotifyOpen(guide->name);
       }
+      if (ImGui::Selectable(std::format("{} Clear variation", icons::kClear))) {
+        NameInfo clear_name = GetNameInfo(guide->name);
+        app_.guide_manager().SetCurrentGuide(clear_name.base_name);
+        app_.history_manager().UpdateRecentView(ObjectType::GUIDE, clear_name.base_name);
+      }
       ImGui::EndPopup();
     }
 

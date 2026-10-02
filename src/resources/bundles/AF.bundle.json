@@ -2945,7 +2945,7 @@
    }
   },
   {
-   "name": "Reflex Flick",
+   "name": "ReflexFlick",
    "def": {
     "durationSeconds": 30,
     "shotType": {
@@ -5902,7 +5902,7 @@
       "numPlays": 1
      },
      {
-      "scenario": "AF Reflex Flick",
+      "scenario": "AF ReflexFlick",
       "numPlays": 1
      },
      {
@@ -6418,7 +6418,20 @@
       ]
      },
      {
-      "text": "Precision (size decreases)",
+      "text": "\nVariations",
+      "guides": [
+       "AF SmoothSwerve 80fov"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "name": "SmoothSwerve Precision",
+   "def": {
+    "sections": [
+     {
+      "text": "",
       "playlists": [
        "AF SmoothSwerve Precision Ladder",
        "AF SmoothSwerve Precision Ladder 15cm",
@@ -6433,6 +6446,14 @@
        "AF SmoothSwerve Precision Ladder 60cm",
        "AF SmoothSwerve Precision Ladder 65cm",
        "AF SmoothSwerve Precision Ladder 70cm"
+      ]
+     },
+     {
+      "text": "\nVariations",
+      "guides": [
+       "AF SmoothSwerve Precision 80fov",
+       "AF SmoothSwerve Precision 10%Faster",
+       "AF SmoothSwerve Precision -30%Taller"
       ]
      }
     ]

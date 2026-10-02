@@ -86,6 +86,11 @@ class PlaylistComponentImpl : public PlaylistComponent {
       if (ImGui::Selectable(std::format("{} Select variation", icons::kTune))) {
         select_variation_dialog_.NotifyOpen(run->playlist.name);
       }
+      if (ImGui::Selectable(std::format("{} Clear variation", icons::kClear))) {
+        NameInfo clear_name = GetNameInfo(run->playlist.name);
+        app_.playlist_manager().SetCurrentPlaylist(clear_name.base_name);
+        app_.history_manager().UpdateRecentView(ObjectType::PLAYLIST, clear_name.base_name);
+      }
 
       bool hide_description = app_.local_store().GetBool(kHideDescriptionsKey);
       std::string description_text =
