@@ -2881,6 +2881,9 @@
     "levelOverrides": {
      "targetRadiusMultiplier": 0.95
     },
+    "scoreTargets": {
+     "targetScore": 80
+    },
     "bounceDef": {
      "bounds": {
       "width": {
@@ -2941,6 +2944,22 @@
      },
      "leftRightInitialDirection": "DIRECTION_IN",
      "forwardBackInitialDirection": "DIRECTION_RANDOM"
+    }
+   }
+  },
+  {
+   "name": "Popcorn Ladder",
+   "def": {
+    "overrides": {},
+    "levelOverrides": {
+     "targetRadiusMultiplier": 0.96
+    },
+    "scoreTargets": {
+     "targetScore": 80
+    },
+    "referenceDef": {
+     "scenarioName": "AF Popcorn",
+     "explicitTargetRadius": 6
     }
    }
   },
@@ -6116,6 +6135,16 @@
       "numPlays": 1
      }
     ]
+   }
+  },
+  {
+   "name": "Popcorn Ladder",
+   "def": {
+    "levels": {
+     "baseScenario": "AF Popcorn Ladder",
+     "maxLevel": 40,
+     "numPlaysPerLevel": 1
+    }
    }
   },
   {
