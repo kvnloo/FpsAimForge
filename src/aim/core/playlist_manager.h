@@ -72,6 +72,7 @@ struct PlaylistRun {
     float high_score;
     i64 epoch_seconds;
     i16 mm_per_360 = 0;
+    std::string hit_percentage_string;
   };
   LazyCache<ItemHighScore> high_score_cache;
 };

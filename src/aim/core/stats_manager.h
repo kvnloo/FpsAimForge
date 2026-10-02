@@ -66,4 +66,6 @@ class StatsManager {
 
 std::unique_ptr<StatsManager> CreateStatsManager(AimDb* db);
 
+std::string GetHitPercentageString(const StatsDbRow& stats);
+
 }  // namespace aim

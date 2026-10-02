@@ -5,6 +5,7 @@
 #include <tuple>
 
 #include "aim/common/times.h"
+#include "aim/common/util.h"
 #include "aim/core/playlist_manager.h"
 
 namespace aim {
@@ -222,6 +223,19 @@ float GetScenarioScoreLevel(float score, float target_score) {
 
 std::unique_ptr<StatsManager> CreateStatsManager(AimDb* db) {
   return std::make_unique<StatsManagerImpl>(db);
+}
+
+std::string GetHitPercentageString(const StatsDbRow& stats) {
+  float num_shots = stats.info.num_shots();
+  float num_hits = stats.info.num_hits();
+  if (num_shots > 0) {
+    float hit_percent = num_hits / num_shots;
+    return std::format("{}/{} ({:.1f}%)",
+                       MaybeIntToString(num_hits, 1),
+                       MaybeIntToString(num_shots, 1),
+                       hit_percent * 100);
+  }
+  return "";
 }
 
 }  // namespace aim

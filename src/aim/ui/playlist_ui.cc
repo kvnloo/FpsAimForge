@@ -292,6 +292,7 @@ void PlaylistRunComponent(const std::string& id, std::shared_ptr<PlaylistRun> ru
       high_score.high_score = stats.high_score_stats.score;
       high_score.epoch_seconds = stats.high_score_stats.epoch_seconds;
       high_score.mm_per_360 = stats.high_score_stats.mm_per_360;
+      high_score.hit_percentage_string = GetHitPercentageString(stats.high_score_stats);
       return std::optional<PlaylistRun::ItemHighScore>(high_score);
     }
     return std::optional<PlaylistRun::ItemHighScore>();
@@ -311,8 +312,10 @@ void PlaylistRunComponent(const std::string& id, std::shared_ptr<PlaylistRun> ru
       std::string high_score_time = GetHowLongAgoStringFromEpochMicros(
           maybe_high_score->epoch_seconds * 1000 * 1000, now_micros);
 
-      help_text = std::format(
-          "{}, {}cm", high_score_time, MaybeIntToString(maybe_high_score->mm_per_360 / 10.0f, 1));
+      help_text = std::format("{}\n{}\n{}cm",
+                              high_score_time,
+                              maybe_high_score->hit_percentage_string,
+                              MaybeIntToString(maybe_high_score->mm_per_360 / 10.0f, 1));
 
       auto scenario_def = app.scenario_manager().GetEvaluatedScenarioDef(item.item.scenario());
       if (scenario_def) {

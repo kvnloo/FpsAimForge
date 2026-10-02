@@ -153,19 +153,6 @@ struct HistoryRow {
   float cm_per_360 = 0;
 };
 
-std::string GetHitPercentageString(const StatsDbRow& stats) {
-  float num_shots = stats.info.num_shots();
-  float num_hits = stats.info.num_hits();
-  if (num_shots > 0) {
-    float hit_percent = num_hits / num_shots;
-    return std::format("{}/{} ({:.1f}%)",
-                       MaybeIntToString(num_hits, 1),
-                       MaybeIntToString(num_shots, 1),
-                       hit_percent * 100);
-  }
-  return "";
-}
-
 struct StatsComparison {
   float score_diff = 0;
   float score_diff_percent = 0;
