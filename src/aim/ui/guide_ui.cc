@@ -164,7 +164,10 @@ class GuideViewer {
     if (!maybe_scenario) {
       return {};
     }
-    float target_score = maybe_scenario->score_targets().target_score();
+
+    float override_target_score = playlist.def().levels().target_score();
+    float target_score =
+        FirstGreaterThanZero(override_target_score, maybe_scenario->score_targets().target_score());
     if (target_score > 0) {
       return app_.stats_manager().GetHighestCompleteScenarioLevel(base_name, target_score);
     }

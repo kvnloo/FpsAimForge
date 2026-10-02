@@ -283,7 +283,7 @@ class StatsScreen : public UiScreen {
 
   void DrawScreenInternal() {
     if (evaluated_scenario_def_) {
-      score_target_ = evaluated_scenario_def_->score_targets().target_score();
+      score_target_ = GetTargetScore(scenario_name_, *evaluated_scenario_def_, playlist_run_);
     }
 
     top_bar_->Draw();

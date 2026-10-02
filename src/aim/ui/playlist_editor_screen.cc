@@ -144,6 +144,15 @@ class PlaylistEditorScreen : public BaseEditorScreen {
                           .set_is_optional()
                           .set_width(char_x_ * 10),
                       PROTO_FLOAT_FIELD(LevelsPlaylistDef, &levels, level_step));
+
+    ImGui::Separator();
+
+    ImGui::InputFloat(ImGui::InputFloatParams::WithLabelAsId("Target score override")
+                          .set_is_optional()
+                          .set_min(0.1)
+                          .set_step(0.1, 2)
+                          .set_width(char_x_ * 12),
+                      PROTO_FLOAT_FIELD(LevelsPlaylistDef, &levels, target_score));
   }
 
   void DrawPlaylistScenariosEditor() {

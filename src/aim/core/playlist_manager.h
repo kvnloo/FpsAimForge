@@ -66,6 +66,8 @@ struct PlaylistRun {
   int current_index = -1;
   std::vector<PlaylistItemProgress> progress_list;
 
+  std::optional<float> GetTargetScoreOverride(const std::string& scenario_name);
+
   struct ItemHighScore {
     float high_score;
     i64 epoch_seconds;
@@ -73,6 +75,10 @@ struct PlaylistRun {
   };
   LazyCache<ItemHighScore> high_score_cache;
 };
+
+float GetTargetScore(const std::string& scenario_name,
+                     ScenarioDef scenario,
+                     std::shared_ptr<PlaylistRun> run);
 
 class PlaylistManager {
  public:

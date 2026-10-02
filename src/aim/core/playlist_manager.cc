@@ -632,6 +632,32 @@ void PlaylistRun::IncrementRunDone(const std::string& scenario_name) {
   }
 }
 
+std::optional<float> PlaylistRun::GetTargetScoreOverride(const std::string& scenario_name) {
+  if (!playlist.def().has_levels()) {
+    return {};
+  }
+  float target_score = playlist.def().levels().target_score();
+  if (target_score <= 0) {
+    return {};
+  }
+
+  if (progress_list.empty()) {
+    return {};
+  }
+
+  NameInfo info = GetNameInfo(scenario_name);
+  info.level = {};
+
+  NameInfo base_info = GetNameInfo(progress_list[0].item.scenario());
+  base_info.level = {};
+
+  if (info.GetFullName() != base_info.GetFullName()) {
+    return {};
+  }
+
+  return target_score;
+}
+
 std::optional<std::string> PlaylistRun::Next() {
   auto next_index = NextIndex();
   if (next_index) {
@@ -658,6 +684,19 @@ std::optional<int> PlaylistRun::NextIndex() {
   }
   int last_index = progress_list.size() - 1;
   return last_index;
+}
+
+float GetTargetScore(const std::string& scenario_name,
+                     ScenarioDef scenario,
+                     std::shared_ptr<PlaylistRun> run) {
+  float target_score = scenario.score_targets().target_score();
+  if (run) {
+    auto target_score_override = run->GetTargetScoreOverride(scenario_name);
+    if (target_score_override) {
+      target_score = *target_score_override;
+    }
+  }
+  return target_score;
 }
 
 }  // namespace aim

@@ -126,6 +126,8 @@ Scenario::Scenario(const CreateScenarioParams& params)
   theme_ = app_.settings_manager().GetCurrentTheme();
   settings_ = app_.settings_manager().GetCurrentSettingsForScenario(scenario_name_);
 
+  target_score_ = GetTargetScore(scenario_name_, def_, app_.playlist_manager().GetCurrentRun());
+
   bool requires_per_frame_target_data = RequiresPerFrameTargetData(def_);
   u16 replay_fps = requires_per_frame_target_data ? kReplayFps : kStaticReplayFps;
   timer_ = ScenarioTimer(replay_fps);
@@ -445,10 +447,8 @@ void Scenario::OnWaitingForClickTick() {
   ImGui::SetCursorPosY(app_.screen_info().center.y + text_size.y * 1);
   ImGui::Text("%s", scenario_name_.c_str());
 
-  // TODO: This target score should factor in playlist override.
-  float score_target = def_.score_targets().target_score();
-  if (score_target > 0) {
-    std::string message = std::format("Target score: {}", MaybeIntToString(score_target, 2));
+  if (target_score_ > 0) {
+    std::string message = std::format("Target score: {}", MaybeIntToString(target_score_, 2));
     text_size = ImGui::CalcTextSize(message.c_str());
     ImGui::SetCursorPosX(app_.screen_info().center.x - text_size.x * 0.5);
     ImGui::Text("%s", message.c_str());
@@ -668,7 +668,6 @@ void Scenario::HandleScenarioDone() {
 
     StatsDbRow stats_row = *maybe_stats_row;
     app_.stats_manager().AddStats(scenario_name_, &stats_row);
-
 
     if (replay_) {
       replay_->FillInMissingPitchYaws();
