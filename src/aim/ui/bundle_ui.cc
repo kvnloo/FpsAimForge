@@ -8,6 +8,7 @@
 #include "aim/core/playlist_manager.h"
 #include "aim/core/scenario_manager.h"
 #include "aim/proto/bundle.pb.h"
+#include "aim/ui/object_browser.h"
 #include "imgui.h"
 
 namespace aim {
@@ -104,8 +105,11 @@ class BundleUiComponentImpl : public BundleUiComponent {
       selected_bundle_name_ = *added_name;
     }
 
-    ImGuiTableFlags flags = ImGuiTableFlags_SizingStretchProp | ImGuiTableFlags_Resizable;
+    ImGuiTableFlags flags = ImGuiTableFlags_SizingStretchProp | ImGuiTableFlags_BordersInnerV;
     if (ImGui::BeginTable("BundleColumns", 2, flags)) {
+      ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthFixed, GetDefaultObjectBrowserWidth());
+      ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthStretch);
+
       ImGui::TableNextColumn();
       ImGui::BeginChild("BundleListColumn");
 

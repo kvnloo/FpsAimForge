@@ -8,6 +8,8 @@
 
 namespace aim {
 
+float GetDefaultObjectBrowserWidth();
+
 class ObjectBrowser {
  public:
   virtual ~ObjectBrowser() {}

@@ -399,4 +399,9 @@ std::unique_ptr<ObjectBrowser> CreateObjectBrowser(ObjectType type) {
   return std::make_unique<ObjectBrowserImpl>(type);
 }
 
+float GetDefaultObjectBrowserWidth() {
+  float char_x = ImGui::GetDefaultCharSizeX();
+  return char_x * 45;
+}
+
 }  // namespace aim

@@ -17,6 +17,7 @@
 #include "aim/scenario/scenario_factory.h"
 #include "aim/ui/bundle_ui.h"
 #include "aim/ui/guide_ui.h"
+#include "aim/ui/object_browser.h"
 #include "aim/ui/playlist_ui.h"
 #include "aim/ui/scenario_ui.h"
 #include "aim/ui/stats/stats_screen.h"
@@ -356,9 +357,11 @@ class HomeScreen : public UiScreen {
   }
 
   void DrawPlaylistsScreen() {
-    ImGuiTableFlags flags = ImGuiTableFlags_SizingStretchProp | ImGuiTableFlags_Resizable;
+    ImGuiTableFlags flags = ImGuiTableFlags_SizingStretchProp | ImGuiTableFlags_BordersInnerV;
+    if (ImGui::BeginTable("PlaylistColumns", 2, flags)) {
+      ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthFixed, GetDefaultObjectBrowserWidth());
+      ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthStretch);
 
-    if (ImGui::BeginTable("PlaylistColumns", 3, flags)) {
       ImGui::TableNextColumn();
 
       if (ImGui::BeginChild("Playlists")) {

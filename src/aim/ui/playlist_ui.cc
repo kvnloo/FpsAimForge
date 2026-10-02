@@ -327,9 +327,15 @@ void PlaylistRunComponent(const std::string& id, std::shared_ptr<PlaylistRun> ru
     scores_help.push_back(help_text);
   }
 
+  float available_width = ImGui::GetContentRegionAvail().x;
+  float max_total_width = ImGui::GetDefaultCharSizeX() * 60;
+
   ImGuiTableFlags flags =
       ImGuiTableFlags_RowBg | ImGuiTableFlags_BordersV | ImGuiTableFlags_Borders;
-  if (!ImGui::BeginTable("PlaylistRuns", has_score_level ? 4 : 3, flags)) {
+  if (!ImGui::BeginTable("PlaylistRuns",
+                         has_score_level ? 4 : 3,
+                         flags,
+                         ImVec2(std::min(available_width, max_total_width), 0))) {
     return;
   }
   ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthStretch);
