@@ -57,6 +57,7 @@ void InitializeImGui(const std::string& imgui_ini_filename,
   io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;   // Enable Gamepad Controls
 
   io.IniFilename = imgui_ini_filename.c_str();
+  // io.IniFilename = nullptr;
 
   ImGuiStyle& style = ImGui::GetStyle();
   style.WindowRounding = 6;
@@ -608,7 +609,7 @@ class ApplicationImpl : public Application {
     return {};
   }
 
-  // Initiliaziation that should not fail unless the application can not realistically function.
+  // Initialization that should not fail unless the application can not realistically function.
   // Should be fast and able to use UiScreen after this is called.
   std::optional<std::string> InitializeCritical(const Stopwatch& stopwatch) {
     auto maybe_error = InitializeAimForgeFolder(file_system_.get());
