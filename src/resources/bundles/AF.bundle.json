@@ -1248,6 +1248,114 @@
    }
   },
   {
+   "name": "Bounce Overhead",
+   "def": {
+    "durationSeconds": 30,
+    "shotType": {
+     "trackingInvincible": true
+    },
+    "targetDef": {
+     "numTargets": 1,
+     "profiles": [
+      {
+       "targetRadius": 3.5,
+       "speed": 132,
+       "acceleration": 135
+      }
+     ]
+    },
+    "room": {
+     "cameraPosition": {
+      "x": 0,
+      "y": -100,
+      "z": -36
+     },
+     "simpleRoom": {
+      "height": 130,
+      "width": 150,
+      "depth": 200
+     }
+    },
+    "levelOverrides": {
+     "targetRadiusMultiplier": 0.96
+    },
+    "bounceDef": {
+     "bounds": {
+      "depth": {
+       "depthPercentValue": 0.95
+      }
+     },
+     "bounceProfiles": [
+      {
+       "height": {
+        "yPercentValue": 0.69
+       },
+       "heightJitter": {
+        "yPercentValue": 0
+       }
+      }
+     ],
+     "leftRightProfiles": [
+      {
+       "centerBias": 0.2,
+       "distance": {
+        "xPercentValue": 0.12
+       },
+       "distanceJitter": {
+        "xPercentValue": 0.035
+       },
+       "speedMultiplier": 0.34,
+       "accelerationMultiplier": 0.18
+      }
+     ],
+     "forwardBackProfiles": [
+      {
+       "distance": {
+        "depthPercentValue": 1
+       },
+       "distanceJitter": {
+        "depthPercentValue": 0
+       },
+       "speedMultiplier": 0.92,
+       "accelerationMultiplier": 1.28
+      }
+     ],
+     "targetPlacementStrategy": {
+      "regions": [
+       {
+        "point": {
+         "x": {
+          "xPercentValue": 0
+         },
+         "y": {
+          "yPercentValue": -0.44
+         }
+        }
+       }
+      ]
+     },
+     "leftRightInitialDirection": "DIRECTION_RANDOM",
+     "forwardBackInitialDirection": "DIRECTION_RANDOM"
+    }
+   }
+  },
+  {
+   "name": "Bounce Overhead Ladder",
+   "def": {
+    "overrides": {},
+    "levelOverrides": {
+     "targetRadiusMultiplier": 0.96
+    },
+    "scoreTargets": {
+     "targetScore": 55
+    },
+    "referenceDef": {
+     "scenarioName": "AF Bounce Overhead",
+     "explicitTargetRadius": 6
+    }
+   }
+  },
+  {
    "name": "CassidyClick",
    "def": {
     "description": "Rate limited multiclick on a strafing target. No accuracy penalty.",
@@ -5289,7 +5397,7 @@
        "xPercentValue": 0
       },
       "y": {
-       "yPercentValue": 0.45
+       "yPercentValue": 0.58
       }
      },
      "simpleRoom": {
@@ -5300,6 +5408,9 @@
     "levelOverrides": {},
     "strafeDef": {
      "bounds": {
+      "height": {
+       "yPercentValue": 0.9
+      },
       "depth": {
        "depthPercentValue": 0.8
       }
@@ -5312,6 +5423,12 @@
      "targetPlacementStrategy": {
       "regions": [
        {
+        "depth": {
+         "depthPercentValue": 0.23
+        },
+        "depthJitter": {
+         "depthPercentValue": 0
+        },
         "point": {
          "x": {
           "xPercentValue": 0
@@ -5325,28 +5442,76 @@
      },
      "leftRightProfiles": [
       {
+       "info": {
+        "weight": 3
+       },
        "centerBias": 0.2,
        "distance": {
-        "xPercentValue": 0.3
+        "xPercentValue": 0.31
        },
        "distanceJitter": {
-        "xPercentValue": 0.105
+        "xPercentValue": 0.155
        }
+      },
+      {
+       "info": {
+        "weight": 1
+       },
+       "centerBias": 0.2,
+       "distance": {
+        "xPercentValue": 0.05
+       },
+       "distanceJitter": {
+        "xPercentValue": 0.03
+       },
+       "speedMultiplier": 0.85,
+       "accelerationMultiplier": 0.86,
+       "accelerationMultiplierJitter": 0.03
       }
      ],
      "forwardBackProfiles": [
       {
+       "centerBias": 0.2,
        "distance": {
         "depthPercentValue": 0.44
        },
        "distanceJitter": {
-        "depthPercentValue": 0.25
-       }
+        "depthPercentValue": 0.225
+       },
+       "speedMultiplier": 0.89,
+       "speedMultiplierJitter": 0.07,
+       "accelerationMultiplier": 0.76,
+       "accelerationMultiplierJitter": 0.03
+      }
+     ],
+     "upDownProfiles": [
+      {
+       "distance": {
+        "yPercentValue": 0.16
+       },
+       "distanceJitter": {
+        "yPercentValue": 0.085
+       },
+       "speedMultiplier": 0.2,
+       "accelerationMultiplier": 0.3
       }
      ],
      "leftRightInitialDirection": "DIRECTION_RANDOM",
      "upDownInitialDirection": "DIRECTION_RANDOM",
      "forwardBackInitialDirection": "DIRECTION_RANDOM"
+    }
+   }
+  },
+  {
+   "name": "UfoTrack2 Ladder",
+   "def": {
+    "overrides": {},
+    "levelOverrides": {
+     "targetRadiusMultiplier": 0.96
+    },
+    "referenceDef": {
+     "scenarioName": "AF UfoTrack2",
+     "explicitTargetRadius": 6
     }
    }
   },
@@ -5952,6 +6117,16 @@
     "description": "",
     "levels": {
      "baseScenario": "AF AngleStrafe Ladder",
+     "maxLevel": 40,
+     "numPlaysPerLevel": 1
+    }
+   }
+  },
+  {
+   "name": "Bounce Overhead Ladder",
+   "def": {
+    "levels": {
+     "baseScenario": "AF Bounce Overhead Ladder",
      "maxLevel": 40,
      "numPlaysPerLevel": 1
     }
@@ -6567,6 +6742,16 @@
    }
   },
   {
+   "name": "UfoTrack2 Ladder",
+   "def": {
+    "levels": {
+     "baseScenario": "AF UfoTrack2 Ladder",
+     "maxLevel": 40,
+     "numPlaysPerLevel": 1
+    }
+   }
+  },
+  {
    "name": "Wall Arc",
    "def": {
     "description": "",
@@ -6656,6 +6841,35 @@
   }
  ],
  "guides": [
+  {
+   "name": "Bounce Overhead",
+   "def": {
+    "sections": [
+     {
+      "text": "",
+      "playlists": [
+       "AF Bounce Overhead Ladder",
+       "AF Bounce Overhead Ladder 10cm",
+       "AF Bounce Overhead Ladder 15cm",
+       "AF Bounce Overhead Ladder 20cm",
+       "AF Bounce Overhead Ladder 25cm",
+       "AF Bounce Overhead Ladder 30cm",
+       "AF Bounce Overhead Ladder 35cm",
+       "AF Bounce Overhead Ladder 40cm",
+       "AF Bounce Overhead Ladder 45cm",
+       "AF Bounce Overhead Ladder 50cm",
+       "AF Bounce Overhead Ladder 55cm",
+       "AF Bounce Overhead Ladder 60cm",
+       "AF Bounce Overhead Ladder 65cm",
+       "AF Bounce Overhead Ladder 70cm",
+       "AF Bounce Overhead Ladder 75cm",
+       "AF Bounce Overhead Ladder 80cm",
+       "AF Bounce Overhead Ladder 85cm"
+      ]
+     }
+    ]
+   }
+  },
   {
    "name": "Popcorn",
    "def": {
@@ -6793,6 +7007,35 @@
        "AF UfoTrack1 Ladder 75cm",
        "AF UfoTrack1 Ladder 80cm",
        "AF UfoTrack1 Ladder 85cm"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "name": "UfoTrack2",
+   "def": {
+    "sections": [
+     {
+      "text": "",
+      "playlists": [
+       "AF UfoTrack2 Ladder",
+       "AF UfoTrack2 Ladder 10cm",
+       "AF UfoTrack2 Ladder 15cm",
+       "AF UfoTrack2 Ladder 20cm",
+       "AF UfoTrack2 Ladder 25cm",
+       "AF UfoTrack2 Ladder 30cm",
+       "AF UfoTrack2 Ladder 35cm",
+       "AF UfoTrack2 Ladder 40cm",
+       "AF UfoTrack2 Ladder 45cm",
+       "AF UfoTrack2 Ladder 50cm",
+       "AF UfoTrack2 Ladder 55cm",
+       "AF UfoTrack2 Ladder 60cm",
+       "AF UfoTrack2 Ladder 65cm",
+       "AF UfoTrack2 Ladder 70cm",
+       "AF UfoTrack2 Ladder 75cm",
+       "AF UfoTrack2 Ladder 80cm",
+       "AF UfoTrack2 Ladder 85cm"
       ]
      }
     ]
