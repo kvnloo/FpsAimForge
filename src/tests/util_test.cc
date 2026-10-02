@@ -36,3 +36,8 @@ TEST(UtilTest, MaybeIntToString_ExactNumber) {
   EXPECT_THAT(MaybeIntToString(1.003, 3), StrEq("1.003"));
   EXPECT_THAT(MaybeIntToString(1.000, 3), StrEq("1"));
 }
+
+TEST(UtilTest, MaybeIntToStringInternal) {
+  EXPECT_THAT(MaybeIntToStringInternal("1,000000", 3), StrEq("1"));
+  EXPECT_THAT(MaybeIntToStringInternal("12,120", 1), StrEq("12.1"));
+}

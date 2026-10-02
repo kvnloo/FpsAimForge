@@ -151,11 +151,19 @@ glm::vec3 ToVec3(const StoredRgb& v) {
 }
 
 std::string MaybeIntToString(float value, int decimal_places) {
-  std::string s = std::to_string(value);
+  return MaybeIntToStringInternal(std::to_string(value), decimal_places);
+}
 
+std::string MaybeIntToStringInternal(std::string s, int decimal_places) {
   size_t dot_pos = s.find('.');
   if (dot_pos == std::string::npos) {
-    return s;
+    // Some users have custom formatting at the snprintf level that can use comma instead of .
+    size_t comma_pos = s.find(',');
+    if (comma_pos == std::string::npos) {
+      return s;
+    }
+    s[comma_pos] = '.';
+    dot_pos = comma_pos;
   }
 
   size_t decimals_start = dot_pos + 1;

@@ -52,6 +52,11 @@ ImU32 ToImCol32(const StoredColor& c);
 
 std::string MaybeIntToString(float value, int decimal_places = 1);
 
+// For testing
+std::string MaybeIntToStringInternal(std::string full_float_value, int decimal_places);
+
+bool ReplaceCommaWithDotInFloatString(std::string* value, size_t* pos);
+
 static std::string FirstNonEmpty(const std::string& v1, const std::string& v2) {
   return v1.size() > 0 ? v1 : v2;
 }
