@@ -277,12 +277,10 @@ class StatsScreen : public UiScreen {
     ImGui::Spacing();
     ImGui::Spacing();
 
-    ImGuiTableFlags main_column_flags = ImGuiTableFlags_SizingStretchProp |
-                                        ImGuiTableFlags_Resizable | ImGuiTableFlags_BordersOuter |
-                                        ImGuiTableFlags_BordersV;
-
+    ImGuiTableFlags main_column_flags = ImGuiTableFlags_BordersOuter | ImGuiTableFlags_BordersV;
     if (ImGui::BeginTable("MainColumns", 2, main_column_flags)) {
-      ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthFixed, ImGui::GetFontSize() * 12);
+      ImGui::TableSetupColumn(
+          "", ImGuiTableColumnFlags_WidthFixed, ImGui::GetDefaultCharSizeX() * 8);
       ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthStretch);
       ImGui::TableNextRow();
 
@@ -641,9 +639,10 @@ class StatsScreen : public UiScreen {
 
   void DrawStatsPanel() {
     ImGui::BeginChild("StatsPanelContainer", ImVec2(0, 0));
-    ImGuiTableFlags flags = ImGuiTableFlags_SizingStretchProp | ImGuiTableFlags_Resizable;
+    ImGuiTableFlags flags = ImGuiTableFlags_BordersInnerV;
     if (ImGui::BeginTable("StatsPanelTable", 2, flags)) {
-      ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthStretch);
+      ImGui::TableSetupColumn(
+          "", ImGuiTableColumnFlags_WidthFixed, ImGui::GetDefaultCharSizeX() * 70);
       ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthStretch);
       ImGui::TableNextRow();
 
