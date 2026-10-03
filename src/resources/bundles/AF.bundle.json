@@ -5542,7 +5542,7 @@
    }
   },
   {
-   "name": "Wall Arc",
+   "name": "WallArc",
    "def": {
     "durationSeconds": 45,
     "shotType": {
@@ -5578,6 +5578,49 @@
      },
      "height": {
       "yPercentValue": 0.8
+     },
+     "startOnGround": true
+    }
+   }
+  },
+  {
+   "name": "WallArc Overhead",
+   "def": {
+    "durationSeconds": 45,
+    "shotType": {
+     "trackingProximity": true
+    },
+    "targetDef": {
+     "numTargets": 1,
+     "profiles": [
+      {
+       "targetRadius": 3,
+       "speed": 122,
+       "acceleration": 160
+      }
+     ]
+    },
+    "room": {
+     "cameraPosition": {
+      "x": 0,
+      "y": -32,
+      "z": -64
+     },
+     "simpleRoom": {
+      "height": 150,
+      "width": 167
+     }
+    },
+    "levelOverrides": {
+     "speedMultiplier": 1.04,
+     "accelerationMultiplier": 1.02
+    },
+    "wallArcDef": {
+     "width": {
+      "xPercentValue": 0.65
+     },
+     "height": {
+      "yPercentValue": 0.58
      },
      "startOnGround": true
     }
@@ -6752,88 +6795,174 @@
    }
   },
   {
-   "name": "Wall Arc",
+   "name": "WallArc",
    "def": {
-    "description": "",
     "items": [
      {
-      "scenario": "AF Wall Arc",
+      "scenario": "AF WallArc",
       "numPlays": 1
      },
      {
-      "scenario": "AF Wall Arc 10cm",
+      "scenario": "AF WallArc 10cm",
       "numPlays": 1
      },
      {
-      "scenario": "AF Wall Arc 15cm",
+      "scenario": "AF WallArc 15cm",
       "numPlays": 1
      },
      {
-      "scenario": "AF Wall Arc 20cm",
+      "scenario": "AF WallArc 20cm",
       "numPlays": 1
      },
      {
-      "scenario": "AF Wall Arc 25cm",
+      "scenario": "AF WallArc 25cm",
       "numPlays": 1
      },
      {
-      "scenario": "AF Wall Arc 30cm",
+      "scenario": "AF WallArc 30cm",
       "numPlays": 1
      },
      {
-      "scenario": "AF Wall Arc 35cm",
+      "scenario": "AF WallArc 35cm",
       "numPlays": 1
      },
      {
-      "scenario": "AF Wall Arc 40cm",
+      "scenario": "AF WallArc 40cm",
       "numPlays": 1
      },
      {
-      "scenario": "AF Wall Arc 45cm",
+      "scenario": "AF WallArc 45cm",
       "numPlays": 1
      },
      {
-      "scenario": "AF Wall Arc 50cm",
+      "scenario": "AF WallArc 50cm",
       "numPlays": 1
      },
      {
-      "scenario": "AF Wall Arc 55cm",
+      "scenario": "AF WallArc 55cm",
       "numPlays": 1
      },
      {
-      "scenario": "AF Wall Arc 60cm",
+      "scenario": "AF WallArc 60cm",
       "numPlays": 1
      },
      {
-      "scenario": "AF Wall Arc 65cm",
+      "scenario": "AF WallArc 65cm",
       "numPlays": 1
      },
      {
-      "scenario": "AF Wall Arc 70cm",
+      "scenario": "AF WallArc 70cm",
       "numPlays": 1
      },
      {
-      "scenario": "AF Wall Arc 75cm",
+      "scenario": "AF WallArc 75cm",
       "numPlays": 1
      },
      {
-      "scenario": "AF Wall Arc 80cm",
+      "scenario": "AF WallArc 80cm",
       "numPlays": 1
      },
      {
-      "scenario": "AF Wall Arc 85cm",
+      "scenario": "AF WallArc 85cm",
       "numPlays": 1
      },
      {
-      "scenario": "AF Wall Arc 90cm",
+      "scenario": "AF WallArc 90cm",
       "numPlays": 1
      },
      {
-      "scenario": "AF Wall Arc 95cm",
+      "scenario": "AF WallArc 95cm",
       "numPlays": 1
      },
      {
-      "scenario": "AF Wall Arc 100cm",
+      "scenario": "AF WallArc 100cm",
+      "numPlays": 1
+     }
+    ]
+   }
+  },
+  {
+   "name": "WallArc Overhead",
+   "def": {
+    "items": [
+     {
+      "scenario": "AF WallArc Overhead",
+      "numPlays": 1
+     },
+     {
+      "scenario": "AF WallArc Overhead 10cm",
+      "numPlays": 1
+     },
+     {
+      "scenario": "AF WallArc Overhead 15cm",
+      "numPlays": 1
+     },
+     {
+      "scenario": "AF WallArc Overhead 20cm",
+      "numPlays": 1
+     },
+     {
+      "scenario": "AF WallArc Overhead 25cm",
+      "numPlays": 1
+     },
+     {
+      "scenario": "AF WallArc Overhead 30cm",
+      "numPlays": 1
+     },
+     {
+      "scenario": "AF WallArc Overhead 35cm",
+      "numPlays": 1
+     },
+     {
+      "scenario": "AF WallArc Overhead 40cm",
+      "numPlays": 1
+     },
+     {
+      "scenario": "AF WallArc Overhead 45cm",
+      "numPlays": 1
+     },
+     {
+      "scenario": "AF WallArc Overhead 50cm",
+      "numPlays": 1
+     },
+     {
+      "scenario": "AF WallArc Overhead 55cm",
+      "numPlays": 1
+     },
+     {
+      "scenario": "AF WallArc Overhead 60cm",
+      "numPlays": 1
+     },
+     {
+      "scenario": "AF WallArc Overhead 65cm",
+      "numPlays": 1
+     },
+     {
+      "scenario": "AF WallArc Overhead 70cm",
+      "numPlays": 1
+     },
+     {
+      "scenario": "AF WallArc Overhead 75cm",
+      "numPlays": 1
+     },
+     {
+      "scenario": "AF WallArc Overhead 80cm",
+      "numPlays": 1
+     },
+     {
+      "scenario": "AF WallArc Overhead 85cm",
+      "numPlays": 1
+     },
+     {
+      "scenario": "AF WallArc Overhead 90cm",
+      "numPlays": 1
+     },
+     {
+      "scenario": "AF WallArc Overhead 95cm",
+      "numPlays": 1
+     },
+     {
+      "scenario": "AF WallArc Overhead 100cm",
       "numPlays": 1
      }
     ]
