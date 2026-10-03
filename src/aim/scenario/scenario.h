@@ -162,6 +162,7 @@ class Scenario : public Screen {
 
   FrameTimes current_times_;
   RunPerformanceStats perf_stats_;
+  u64 latest_mouse_event_timestamp_ns_ = 0;
   bool force_start_immediately_ = false;
   bool is_adjusting_crosshair_ = false;
   bool is_adjusting_health_bar_size_ = false;

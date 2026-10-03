@@ -1,9 +1,25 @@
 #include "perf.h"
 
+#include <limits>
+
 #include "aim/common/imgui_ext.h"
 #include "imgui.h"
 
 namespace aim {
+
+i64 ElapsedMicrosBetweenNanos(u64 start_ns, u64 end_ns) {
+  if (start_ns == 0 || end_ns <= start_ns) {
+    return 0;
+  }
+
+  constexpr u64 kNanosPerMicro = 1000;
+  u64 elapsed_micros = (end_ns - start_ns) / kNanosPerMicro;
+  constexpr u64 kMaxI64 = static_cast<u64>(std::numeric_limits<i64>::max());
+  if (elapsed_micros > kMaxI64) {
+    return std::numeric_limits<i64>::max();
+  }
+  return static_cast<i64>(elapsed_micros);
+}
 
 void DumpHistogram(const TimeHistogram& h) {
   std::vector<std::tuple<std::string, std::string, i64>> values{
