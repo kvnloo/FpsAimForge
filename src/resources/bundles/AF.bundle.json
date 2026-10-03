@@ -3384,6 +3384,349 @@
    }
   },
   {
+   "name": "SkeetClick",
+   "def": {
+    "durationSeconds": 45,
+    "shotType": {
+     "clickSingle": true,
+     "accuracyPenalty": "ACCURACY_PENALTY_SQRT"
+    },
+    "targetDef": {
+     "numTargets": 4,
+     "profiles": [
+      {
+       "targetRadius": 3.55,
+       "speed": 108,
+       "acceleration": 125
+      }
+     ],
+     "removeTargetAfterSeconds": 1.8,
+     "staggerInitialTargetsSeconds": 0.2
+    },
+    "room": {
+     "cameraPosition": {
+      "x": 0,
+      "y": -200,
+      "z": 0
+     },
+     "simpleRoom": {
+      "height": 139,
+      "width": 158
+     }
+    },
+    "levelOverrides": {
+     "targetRadiusMultiplier": 0.96
+    },
+    "bounceDef": {
+     "bounceProfiles": [
+      {
+       "height": {
+        "yPercentValue": 0.64
+       },
+       "heightJitter": {
+        "yPercentValue": 0.06
+       },
+       "speedMultiplier": 1,
+       "speedMultiplierJitter": 0.11,
+       "accelerationMultiplier": 1,
+       "accelerationMultiplierJitter": 0.03,
+       "floatTime": 0.01
+      }
+     ],
+     "leftRightProfiles": [
+      {
+       "distance": {
+        "xPercentValue": 1
+       },
+       "distanceJitter": {
+        "xPercentValue": 0
+       },
+       "speedMultiplier": 0.74,
+       "speedMultiplierJitter": 0.12,
+       "accelerationMultiplier": 0.75,
+       "accelerationMultiplierJitter": 0.05,
+       "startSpeedPercent": 0.57
+      }
+     ],
+     "targetPlacementStrategy": {
+      "regions": [
+       {
+        "info": {
+         "description": "Left Region"
+        },
+        "xOffset": {
+         "xPercentValue": -0.45
+        },
+        "yOffset": {
+         "yPercentValue": -0.2
+        },
+        "rectangle": {
+         "xLength": {
+          "xPercentValue": 0.02
+         },
+         "yLength": {
+          "yPercentValue": 0.23
+         }
+        }
+       },
+       {
+        "info": {
+         "description": "Right Region"
+        },
+        "xOffset": {
+         "xPercentValue": 0.45
+        },
+        "yOffset": {
+         "yPercentValue": -0.2
+        },
+        "rectangle": {
+         "xLength": {
+          "xPercentValue": 0.02
+         },
+         "yLength": {
+          "yPercentValue": 0.23
+         }
+        }
+       }
+      ],
+      "regionsInfo": {
+       "explicitOrder": [
+        0,
+        1
+       ]
+      }
+     },
+     "leftRightInitialDirection": "DIRECTION_IN",
+     "forwardBackInitialDirection": "DIRECTION_RANDOM"
+    }
+   }
+  },
+  {
+   "name": "SkeetClick Falling",
+   "def": {
+    "durationSeconds": 45,
+    "shotType": {
+     "clickSingle": true,
+     "accuracyPenalty": "ACCURACY_PENALTY_SQRT"
+    },
+    "targetDef": {
+     "numTargets": 4,
+     "profiles": [
+      {
+       "targetRadius": 3.55,
+       "speed": 108,
+       "acceleration": 85
+      }
+     ],
+     "removeTargetAfterSeconds": 1.6,
+     "staggerInitialTargetsSeconds": 0.2
+    },
+    "room": {
+     "cameraPosition": {
+      "x": 0,
+      "y": -200,
+      "z": 0
+     },
+     "simpleRoom": {
+      "height": 139,
+      "width": 176
+     }
+    },
+    "levelOverrides": {
+     "targetRadiusMultiplier": 0.96
+    },
+    "bounceDef": {
+     "bounceProfiles": [
+      {
+       "height": {
+        "yPercentValue": 0.7
+       },
+       "heightJitter": {
+        "yPercentValue": 0
+       }
+      }
+     ],
+     "leftRightProfiles": [
+      {
+       "distance": {
+        "xPercentValue": 1
+       },
+       "distanceJitter": {
+        "xPercentValue": 0
+       },
+       "startSpeedPercent": 0.57
+      }
+     ],
+     "targetPlacementStrategy": {
+      "regions": [
+       {
+        "info": {
+         "description": "Left Region",
+         "weight": 1
+        },
+        "xOffset": {
+         "xPercentValue": -0.45
+        },
+        "yOffset": {
+         "yPercentValue": 0.3
+        },
+        "rectangle": {
+         "xLength": {
+          "xPercentValue": 0.02
+         },
+         "yLength": {
+          "yPercentValue": 0.24
+         }
+        }
+       },
+       {
+        "info": {
+         "description": "Right Region",
+         "weight": 1
+        },
+        "xOffset": {
+         "xPercentValue": 0.45
+        },
+        "yOffset": {
+         "yPercentValue": 0.3
+        },
+        "rectangle": {
+         "xLength": {
+          "xPercentValue": 0.02
+         },
+         "yLength": {
+          "yPercentValue": 0.24
+         }
+        }
+       }
+      ]
+     },
+     "leftRightInitialDirection": "DIRECTION_IN",
+     "forwardBackInitialDirection": "DIRECTION_RANDOM"
+    }
+   }
+  },
+  {
+   "name": "SkeetSwitch",
+   "def": {
+    "durationSeconds": 45,
+    "shotType": {
+     "trackingKill": true,
+     "noPartialKills": true,
+     "healthSeconds": 0.32,
+     "removeIfBelowHealthSeconds": 0.1
+    },
+    "targetDef": {
+     "numTargets": 3,
+     "profiles": [
+      {
+       "targetRadius": 3.55,
+       "speed": 108,
+       "acceleration": 125
+      }
+     ],
+     "removeTargetAfterSeconds": 1.8,
+     "staggerInitialTargetsSeconds": 0.2
+    },
+    "room": {
+     "cameraPosition": {
+      "x": 0,
+      "y": -200,
+      "z": 0
+     },
+     "simpleRoom": {
+      "height": 139,
+      "width": 158
+     }
+    },
+    "levelOverrides": {
+     "targetRadiusMultiplier": 0.96
+    },
+    "bounceDef": {
+     "bounceProfiles": [
+      {
+       "height": {
+        "yPercentValue": 0.64
+       },
+       "heightJitter": {
+        "yPercentValue": 0.06
+       },
+       "speedMultiplier": 1,
+       "speedMultiplierJitter": 0.11,
+       "accelerationMultiplier": 1,
+       "accelerationMultiplierJitter": 0.03,
+       "floatTime": 0.01
+      }
+     ],
+     "leftRightProfiles": [
+      {
+       "distance": {
+        "xPercentValue": 1
+       },
+       "distanceJitter": {
+        "xPercentValue": 0
+       },
+       "speedMultiplier": 0.74,
+       "speedMultiplierJitter": 0.12,
+       "accelerationMultiplier": 0.75,
+       "accelerationMultiplierJitter": 0.05,
+       "startSpeedPercent": 0.57
+      }
+     ],
+     "targetPlacementStrategy": {
+      "regions": [
+       {
+        "info": {
+         "description": "Left Region"
+        },
+        "xOffset": {
+         "xPercentValue": -0.45
+        },
+        "yOffset": {
+         "yPercentValue": -0.2
+        },
+        "rectangle": {
+         "xLength": {
+          "xPercentValue": 0.02
+         },
+         "yLength": {
+          "yPercentValue": 0.23
+         }
+        }
+       },
+       {
+        "info": {
+         "description": "Right Region"
+        },
+        "xOffset": {
+         "xPercentValue": 0.45
+        },
+        "yOffset": {
+         "yPercentValue": -0.2
+        },
+        "rectangle": {
+         "xLength": {
+          "xPercentValue": 0.02
+         },
+         "yLength": {
+          "yPercentValue": 0.23
+         }
+        }
+       }
+      ],
+      "regionsInfo": {
+       "explicitOrder": [
+        0,
+        1
+       ]
+      }
+     },
+     "leftRightInitialDirection": "DIRECTION_IN",
+     "forwardBackInitialDirection": "DIRECTION_RANDOM"
+    }
+   }
+  },
+  {
    "name": "SkyTs Wide",
    "def": {
     "durationSeconds": 40,
