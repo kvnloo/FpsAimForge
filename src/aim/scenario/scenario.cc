@@ -200,11 +200,19 @@ void Scenario::OnEvents(std::span<SDL_Event> events) {
       xrel += event.motion.xrel;
       yrel += event.motion.yrel;
       has_mouse_move = true;
+      if (is_running()) {
+        latest_mouse_event_timestamp_ns_ =
+            std::max(latest_mouse_event_timestamp_ns_, event.motion.timestamp);
+      }
     }
     OnEvent(event);
   }
   if (has_mouse_move) {
     camera_.Update(xrel, yrel, radians_per_dot_);
+  }
+  if (is_running() && latest_mouse_event_timestamp_ns_ > 0) {
+    current_times_.mouse_event_to_dispatch_micros =
+        ElapsedMicrosBetweenNanos(latest_mouse_event_timestamp_ns_, SDL_GetTicksNS());
   }
 }
 
@@ -374,6 +382,7 @@ void Scenario::OnTickStart() {
       initialized_ = true;
     }
     current_times_ = {};
+    latest_mouse_event_timestamp_ns_ = 0;
     current_times_.start = timer_.GetElapsedMicros();
     current_times_.events_start = current_times_.start;
   }
@@ -585,6 +594,10 @@ void Scenario::OnRunningTick() {
   UpdateState(&update_data_);
   num_state_updates_++;
   current_times_.update_end = timer_.GetElapsedMicros();
+  if (latest_mouse_event_timestamp_ns_ > 0) {
+    current_times_.mouse_event_to_update_end_micros =
+        ElapsedMicrosBetweenNanos(latest_mouse_event_timestamp_ns_, SDL_GetTicksNS());
+  }
 
   // Render if forced or if the last render was over ~1ms ago.
   bool do_render = update_data_.force_render ||
@@ -633,6 +646,10 @@ void Scenario::OnRunningTick() {
                                  look_at_,
                                  &ctx);
 
+  if (latest_mouse_event_timestamp_ns_ > 0 && ctx.submit_timestamp_ns > 0) {
+    current_times_.mouse_event_to_submit_micros =
+        ElapsedMicrosBetweenNanos(latest_mouse_event_timestamp_ns_, ctx.submit_timestamp_ns);
+  }
   current_times_.render.end = timer_.GetElapsedMicros();
   UpdatePerfStats();
 }
@@ -698,6 +715,12 @@ void Scenario::UpdatePerfStats() {
                                               current_times_.update_start);
   perf_stats_.events_time_histogram.Increment(current_times_.events_end -
                                               current_times_.events_start);
+  perf_stats_.mouse_event_to_dispatch_histogram.Increment(
+      current_times_.mouse_event_to_dispatch_micros);
+  perf_stats_.mouse_event_to_update_end_histogram.Increment(
+      current_times_.mouse_event_to_update_end_micros);
+  perf_stats_.mouse_event_to_submit_histogram.Increment(
+      current_times_.mouse_event_to_submit_micros);
   if (current_times_.total > perf_stats_.worst_times.total) {
     perf_stats_.worst_times = current_times_;
     perf_stats_.worst_times_micros = timer_.GetElapsedMicros();
